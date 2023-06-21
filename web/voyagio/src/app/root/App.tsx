@@ -1,21 +1,22 @@
-import { Main } from "../../pages/Main/Main.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Main } from '/src/pages/Main/Main';
+import { SearchPage } from '/src/pages/Search';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Main />,
   },
   {
-    path: "/login",
+    path: '/login',
     element: <div>Login page should be here</div>,
   },
   {
-    path: "/search",
-    element: <div>Search page should be here</div>,
+    path: '/search',
+    element: <SearchPage />,
   },
   {
-    path: "*",
+    path: '*',
     element: <div>404</div>,
   },
 ]);

@@ -1,19 +1,25 @@
-import { useMainController } from "./useMainController.ts";
-import { Heading } from "./Main.styles.ts";
+import { useMainController } from './useMainController';
+import { Heading } from './Main.styles';
 
-export const Main = () => {
+export function Main() {
   const { count, setCount } = useMainController();
 
   return (
     <>
-      <div></div>
+      <div />
       <Heading size={72}>Vite + React</Heading>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          count is
+          {' '}
+          {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit
+          {' '}
+          <code>src/App.tsx</code>
+          {' '}
+          and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
@@ -21,4 +27,4 @@ export const Main = () => {
       </p>
     </>
   );
-};
+}

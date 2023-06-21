@@ -12,5 +12,11 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'import/prefer-default-export': 'off',
+    'react/button-has-type': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/function-component-definition': 'off',
+    'import/no-absolute-path': 'off',
+    'import/extensions': 'off'
   },
 }

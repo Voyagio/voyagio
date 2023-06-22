@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Main } from '/src/pages/Main/Main';
 import { SearchPage } from '/src/pages/Search';
+import { LoginPage } from '/src/pages/LoginPage';
 
 const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <div>Login page should be here</div>,
+    element: <LoginPage />,
   },
   {
     path: '/search',

@@ -13,4 +13,4 @@ class Address(Base):
     lat = Column(Float, nullable=False)
     lon = Column(Float, nullable=False)
     value = Column(String, nullable=False)
-    places = relationship("Place")
+    places = relationship("Place", backref='address')

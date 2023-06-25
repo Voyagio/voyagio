@@ -23,3 +23,10 @@ def add_place_to_collection(session: Session, collection_id: uuid.UUID, place_id
     collection = session.query(collection_models.Collection).get(collection_id)
     collection.places.append(place)
     session.commit()
+
+
+def remove_place_from_collection(session: Session, collection_id: uuid.UUID, place_id: uuid.UUID):
+    place = session.query(place_models.Place).get(place_id)
+    collection = session.query(collection_models.Collection).get(collection_id)
+    collection.places.remove(place)
+    session.commit()

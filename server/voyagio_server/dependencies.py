@@ -1,3 +1,5 @@
+from fastapi.security import HTTPBearer
+
 import uuid
 
 from models import user as user_models

@@ -9,4 +9,6 @@ export const SearchPageContentContainer = styled.div`
   padding: 32px 48px;
   
   display: flex;
+  flex-direction: column;
+  gap: 32px;
 `;

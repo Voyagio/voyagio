@@ -1,3 +1,4 @@
+import { Recommendations } from '/src/components/Recommendations';
 import { SearchField } from '/src/components/SearchField';
 import { SearchPageContainer, SearchPageContentContainer } from '/src/pages/Search/Search.styled.ts';
 import { FC } from 'react';
@@ -8,6 +9,7 @@ export const SearchPage: FC = () => (
     <Header />
     <SearchPageContentContainer>
       <SearchField />
+      <Recommendations />
     </SearchPageContentContainer>
   </SearchPageContainer>
 );

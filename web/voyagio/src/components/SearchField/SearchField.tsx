@@ -1,15 +1,15 @@
 import {
-  Field, FieldContainer, Label, SearchFieldCard,
+  Field, FieldContainer, InsideCard, Label, SearchFieldCard,
 } from '/src/components/SearchField/SearchField.styled.ts';
 import { FC } from 'react';
 
 export const SearchField: FC = () => (
   <SearchFieldCard>
-    <div>
+    <InsideCard>
       <Label>One step for your trip</Label>
       <FieldContainer>
         <Field placeholder="Search..." />
       </FieldContainer>
-    </div>
+    </InsideCard>
   </SearchFieldCard>
 );

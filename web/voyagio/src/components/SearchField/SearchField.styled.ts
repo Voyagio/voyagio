@@ -7,14 +7,14 @@ export const SearchFieldCard = styled.div`
   
   height: 488px;
   width: 100%;
-  background-color: gray;
+  background-color: darkgray;
   
+  background-blend-mode: multiply;
   background-image: url('/backgroundSearch.jpg');
   background-position: center;
   background-size: cover;
   
   color: white;
-  font-family: 'Lato', sans-serif;
   
   border-radius: 20px;
 `;
@@ -23,7 +23,7 @@ export const FieldContainer = styled.div`
   display: flex;
   align-items: center;
   
-  width: 886px;
+  width: 100%;
   height: 50px;
   
   border-radius: 16px;
@@ -36,20 +36,26 @@ export const FieldContainer = styled.div`
 `;
 
 export const Field = styled.input`
-  font-size: 24px;
+  font-size: 20px;
   width: 100%;
-  
+
   border: 0;
   border-bottom: solid 1px gray;
   
   &:focus {
     outline: none;
-    border-bottom: solid 1px black;
-
+    border-bottom: solid 2px black;
   }
 `;
 
-export const Label = styled.h2`
+export const Label = styled.h1`
   margin-top: 0;
   margin-bottom: 16px;
+`;
+
+export const InsideCard = styled.div`
+  max-width: 886px;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
 `;

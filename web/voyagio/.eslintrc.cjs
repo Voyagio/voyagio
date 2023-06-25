@@ -17,6 +17,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': 'off',
     'import/no-absolute-path': 'off',
-    'import/extensions': 'off'
+    'import/extensions': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off'
   },
 }

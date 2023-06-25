@@ -17,3 +17,11 @@ export const HeaderContainer = styled.div`
 export const Logo = styled.img`
   height: 32px;
 `;
+
+export const CircleImg = styled.img`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+
+  object-fit: cover;
+`;

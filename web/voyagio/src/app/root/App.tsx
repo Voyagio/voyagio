@@ -2,6 +2,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Main } from '/src/pages/Main/Main';
 import { SearchPage } from '/src/pages/Search';
 
+import '@fontsource/lato';
+import '@fontsource/lato/400.css';
+import '@fontsource/lato/400-italic.css';
+
 const router = createBrowserRouter([
   {
     path: '/',

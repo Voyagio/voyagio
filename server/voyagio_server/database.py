@@ -11,7 +11,8 @@ from config import Config
 SQLALCHEMY_DATABASE_URL = Config.POSTGRES_CONNECTION_STRING
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL
+    SQLALCHEMY_DATABASE_URL,
+    echo=True
 )
 
 SessionLocal = sessionmaker(
@@ -29,6 +30,9 @@ def setup_database():
         create_database(engine.url)
 
     from models import user
+    from models import place
+    from models import address
+    from models import category
     Base.metadata.create_all(bind=engine)
 
 

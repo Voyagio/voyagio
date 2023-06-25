@@ -1,12 +1,15 @@
 import uuid
 
-from sqlalchemy import Column, String, Float, ForeignKey
+from sqlalchemy import Table, Column, String, Float, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Relationship
 
 from database import Base
-from .place_category import place_category
-from .category import Category
+
+
+PlaceCategory = Table('place_category', Base.metadata,
+                       Column('place_id', UUID, ForeignKey('places.id')),
+                       Column('category_id', UUID, ForeignKey('categories.id')))
 
 
 class Place(Base):

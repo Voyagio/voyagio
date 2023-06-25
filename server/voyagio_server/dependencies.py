@@ -12,7 +12,10 @@ security = HTTPBearer()
 
 
 def get_user_id_from_token(access_token: str) -> uuid.UUID | None:
-    payload = jwt.decode(access_token, key="secret", algorithms=["HS256"])
+    try:
+        payload = jwt.decode(access_token, key="secret", algorithms=["HS256"])
+    except jwt.exceptions.PyJWTError:
+        return None
     if "user_id" not in payload:
         return None
     return uuid.UUID(payload["user_id"])

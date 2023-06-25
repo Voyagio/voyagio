@@ -1,7 +1,8 @@
 import uuid
 
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
+from passlib.hash import pbkdf2_sha256
 
 from database import Base
 
@@ -11,3 +12,12 @@ class User(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     email = Column(String, nullable=False, unique=True)
+    hashed_password = Column(String)
+    favorites_collection_id = Column(UUID(as_uuid=True), ForeignKey("collections.id"))
+    current_trip_collection_id = Column(UUID(as_uuid=True), ForeignKey("collections.id"))
+
+    def set_password(self, password: str):
+        self.hashed_password = pbkdf2_sha256.hash(password)
+
+    def verify_password(self, password: str):
+        return pbkdf2_sha256.verify(password, self.hashed_password)

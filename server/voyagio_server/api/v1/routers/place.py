@@ -8,7 +8,7 @@ from database import get_session
 places_router = APIRouter(prefix="", tags=["place"])
 
 
-@places_router.post("/places", response_model=list[place_schemas.Place])
+@places_router.post("/places", response_model=place_schemas.Place)
 async def create_place(place: place_schemas.PlaceCreate, db: Session = Depends(get_session)):
     db_place = place_crud.create_place(session=db, place=place)
 

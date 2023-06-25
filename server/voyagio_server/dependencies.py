@@ -3,6 +3,10 @@ import uuid
 import jwt
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer
+from sqlalchemy.orm import Session
+
+from database import get_session
+from models.user import User
 
 security = HTTPBearer()
 
@@ -19,3 +23,7 @@ def get_current_user_id(auth=Depends(security)) -> uuid.UUID:
     if not user_id:
         raise HTTPException(status_code=401, detail="Invalid access token")
     return user_id
+
+
+def get_current_user(db: Session = Depends(get_session), user_id: uuid.UUID = Depends(get_current_user_id)) -> User | None:
+    return db.query(User).filter(User.id == user_id).one_or_none()

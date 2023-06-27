@@ -23,7 +23,9 @@ def set_access_token_cookie(response: Response, access_token: str):
         key="access_token",
         value=access_token,
         max_age=cookie_age,
-        expires=cookie_age
+        expires=cookie_age,
+        httponly=True,
+        samesite="none",
     )
 
 

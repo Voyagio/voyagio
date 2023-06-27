@@ -31,7 +31,8 @@ export const AuthForm: FC<AuthFormProps> = ({ signup }) => {
       password: '',
     },
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
+      email: (val) =>
+        /^\S+@\S+$/.test(val) ? null : 'Wrong format of the email address',
       password: (val) =>
         val.length <= 6
           ? 'Password should include at least 6 characters'
@@ -40,8 +41,23 @@ export const AuthForm: FC<AuthFormProps> = ({ signup }) => {
   });
 
   const handleSubmit = () => {
-    if (signup) handleSignup(form.values.email, form.values.password);
-    else handleLogin(form.values.email, form.values.password);
+    const res = signup
+      ? handleSignup(form.values.email, form.values.password)
+      : handleLogin(form.values.email, form.values.password);
+
+    res.catch((ax_err) => {
+      switch (ax_err.response.status) {
+        case 409:
+          form.setFieldError('email', 'Email already in use');
+          break;
+        case 401:
+          form.setFieldError(
+            'password',
+            'Login failed. Wrong email or password.'
+          );
+          break;
+      }
+    });
   };
 
   return (
@@ -52,7 +68,7 @@ export const AuthForm: FC<AuthFormProps> = ({ signup }) => {
           placeholder="a.chupkova@innopolis.university"
           value={form.values.email}
           onChange={(event) => form.setFieldValue('email', event.target.value)}
-          error={form.errors.email && 'Wrong format of email address'}
+          error={form.errors.email}
           styles={{
             label: { fontFamily: 'Lato, sans-serif', fontWeight: 600 },
           }}
@@ -64,10 +80,7 @@ export const AuthForm: FC<AuthFormProps> = ({ signup }) => {
           onChange={(event) =>
             form.setFieldValue('password', event.target.value)
           }
-          error={
-            form.errors.password &&
-            'Password should include at least 6 characters'
-          }
+          error={form.errors.password}
           styles={{
             label: { fontFamily: 'Lato, sans-serif', fontWeight: 600 },
           }}

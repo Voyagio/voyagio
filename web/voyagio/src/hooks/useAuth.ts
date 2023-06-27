@@ -18,9 +18,9 @@ export const useAuth = () => {
 
     if (response.status === 200) {
       navigate('/search');
-    } else {
-      console.log('Login failed');
     }
+
+    return response;
   };
 
   const handleSignup = async (email: string, password: string) => {
@@ -37,9 +37,9 @@ export const useAuth = () => {
 
     if (response.status === 200) {
       navigate('/search');
-    } else {
-      console.log('Signup failed');
     }
+
+    return response;
   };
 
   return {

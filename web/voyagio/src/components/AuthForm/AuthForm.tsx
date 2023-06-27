@@ -1,11 +1,11 @@
 import { useForm } from '@mantine/form';
 import { FC } from 'react';
 import {
-  LoginFormContainer,
+  AuthFormContainer,
   Icon,
   GoogleButton,
-  LoginInputContainer,
-} from './LoginForm.styled';
+  AuthInputContainer,
+} from './AuthForm.styled';
 import GoogleIcon from '/public/google_icon.svg';
 import {
   Button,
@@ -14,8 +14,17 @@ import {
   PasswordInput,
   TextInput,
 } from '@mantine/core';
+import { useAuth } from '/src/hooks/useAuth';
 
-export const LoginForm: FC = () => {
+type AuthFormProps = {
+  signup: boolean;
+};
+
+export const AuthForm: FC<AuthFormProps> = ({ signup }) => {
+  const { handleLogin, handleSignup } = useAuth();
+
+  const text = signup ? 'Sign up' : 'Sign in';
+
   const form = useForm({
     initialValues: {
       email: '',
@@ -29,9 +38,15 @@ export const LoginForm: FC = () => {
           : null,
     },
   });
+
+  const handleSubmit = () => {
+    if (signup) handleSignup(form.values.email, form.values.password);
+    else handleLogin(form.values.email, form.values.password);
+  };
+
   return (
-    <LoginFormContainer onSubmit={form.onSubmit(() => {})}>
-      <LoginInputContainer>
+    <AuthFormContainer onSubmit={form.onSubmit(handleSubmit)}>
+      <AuthInputContainer>
         <TextInput
           label="Email"
           placeholder="a.chupkova@innopolis.university"
@@ -57,10 +72,10 @@ export const LoginForm: FC = () => {
             label: { fontFamily: 'Lato, sans-serif', fontWeight: 600 },
           }}
         />
-      </LoginInputContainer>
+      </AuthInputContainer>
       <Checkbox label="Remember me" color="dark" />
       <Button type="submit" radius="sm">
-        Sign in
+        {text}
       </Button>
       <Divider
         label="OR"
@@ -69,8 +84,8 @@ export const LoginForm: FC = () => {
       />
       <GoogleButton type="submit" radius="sm" variant="subtle" color="dark">
         <Icon src={GoogleIcon} alt="Google" />
-        <span>Sign in with Google</span>
+        <span>{`${text} with Google`}</span>
       </GoogleButton>
-    </LoginFormContainer>
+    </AuthFormContainer>
   );
 };

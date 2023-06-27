@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import img from '/public/backgroundLogin.jpg';
 
-export const LoginPageContainer = styled.div`
+export const AuthPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 124px;

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
-export const LoginCardContainer = styled.div`
+export const AuthCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 56px 28px;
@@ -9,38 +10,38 @@ export const LoginCardContainer = styled.div`
   gap: 16px;
 `;
 
-export const LoginCardTextGroup = styled.div`
+export const AuthCardTextGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: center;
 `;
 
-export const LoginCardTitle = styled.h4`
+export const AuthCardTitle = styled.h4`
   font-size: 20px;
   margin: 0;
   font-weight: 400;
 `;
 
-export const LoginCardSpan = styled.span`
+export const AuthCardSpan = styled.span`
   font-size: 12px;
   font-weight: 400;
   color: #adb5bd;
 `;
 
-export const LoginLinkGroup = styled.div`
+export const AuthLinkGroup = styled.div`
   display: flex;
   gap: 4px;
   justify-content: center;
   font-size: 12px;
 `;
 
-export const LoginLinkSpan = styled.span`
+export const AuthLinkSpan = styled.span`
   font-weight: 300;
   color: #212529;
 `;
 
-export const LoginLinkA = styled.a`
+export const AuthLinkA = styled(Link)`
   cursor: pointer;
   font-weight: 500;
   text-decoration: none;

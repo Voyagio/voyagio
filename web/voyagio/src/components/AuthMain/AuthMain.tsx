@@ -7,27 +7,27 @@ import {
   InformationH3,
   InformationHeaders,
   KebabCircle,
-  LoginInformationContainer,
-  LoginPageContactsGroup,
-  LoginPageKebabGroup,
-  LoginPageMainContainer,
-  LoginUnderlay,
-} from './LoginMain.styled';
-import { LoginCard } from '../LoginCard';
+  AuthInformationContainer,
+  AuthPageContactsGroup,
+  AuthPageKebabGroup,
+  AuthPageMainContainer,
+  AuthUnderlay,
+} from './AuthMain.styled';
+import { AuthCard } from '../AuthCard';
 
-export const LoginMain: FC = () => {
+export const AuthMain: FC = () => {
   return (
-    <LoginPageMainContainer>
-      <LoginPageKebabGroup>
+    <AuthPageMainContainer>
+      <AuthPageKebabGroup>
         <KebabCircle current={true} />
         <KebabCircle />
         <KebabCircle />
-      </LoginPageKebabGroup>
+      </AuthPageKebabGroup>
 
-      <LoginUnderlay>
-        <LoginCard />
+      <AuthUnderlay>
+        <AuthCard />
 
-        <LoginInformationContainer>
+        <AuthInformationContainer>
           <InformationHeaders>
             <InformationH1 current={true}>Search places</InformationH1>
             <InformationH1>Find exciting ones</InformationH1>
@@ -35,13 +35,13 @@ export const LoginMain: FC = () => {
           </InformationHeaders>
 
           <InformationH3>Satisfy by personal recommendations</InformationH3>
-        </LoginInformationContainer>
-      </LoginUnderlay>
+        </AuthInformationContainer>
+      </AuthUnderlay>
 
-      <LoginPageContactsGroup>
+      <AuthPageContactsGroup>
         <ContactIcon src={VkIcon} alt="vk" />
         <ContactIcon src={InstaIcon} alt="instagram" />
-      </LoginPageContactsGroup>
-    </LoginPageMainContainer>
+      </AuthPageContactsGroup>
+    </AuthPageMainContainer>
   );
 };

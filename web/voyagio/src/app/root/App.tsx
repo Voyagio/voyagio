@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Main } from '/src/pages/Main/Main';
 import { SearchPage } from '/src/pages/Search';
-import { LoginPage } from '/src/pages/LoginPage';
+import { AuthPage } from '/src/pages/AuthPage';
 
 import '@fontsource/lato';
 import '@fontsource/lato/400.css';
@@ -14,7 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <AuthPage />,
+  },
+  {
+    path: '/signup',
+    element: <AuthPage signup />,
   },
   {
     path: '/search',

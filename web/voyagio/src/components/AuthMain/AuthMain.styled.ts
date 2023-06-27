@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const LoginPageMainContainer = styled.main`
+export const AuthPageMainContainer = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,13 +8,13 @@ export const LoginPageMainContainer = styled.main`
   padding: 0 50px;
 `;
 
-export const LoginPageContactsGroup = styled.div`
+export const AuthPageContactsGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
 `;
 
-export const LoginPageKebabGroup = styled.div`
+export const AuthPageKebabGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -28,7 +28,7 @@ export const KebabCircle = styled.div((props: { current?: boolean }) => ({
   opacity: props.current ? '1' : '0.3',
 }));
 
-export const LoginUnderlay = styled.div`
+export const AuthUnderlay = styled.div`
   display: flex;
   justify-content: center;
   border-radius: 20px;
@@ -39,7 +39,7 @@ export const LoginUnderlay = styled.div`
   gap: 111px;
 `;
 
-export const LoginInformationContainer = styled.div`
+export const AuthInformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

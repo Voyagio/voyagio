@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 import { Button, ButtonProps, createPolymorphicComponent } from '@mantine/core';
 
-export const LoginFormContainer = styled.form`
+export const AuthFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
   min-width: 304px;
 `;
 
-export const LoginInputContainer = styled.div`
+export const AuthInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;

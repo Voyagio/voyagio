@@ -45,4 +45,6 @@ export const ButtonsContainer = styled.div`
   margin-top: 20px;
   display: flex;
   gap: 12px;
+  
+  ;
 `;

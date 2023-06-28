@@ -19,6 +19,7 @@
     "@mantine/hooks": "^6.0.14",
     "axios": "^1.4.0",
     "css-filter-converter": "^1.0.109",
+    "@tabler/icons-react": "^2.23.0",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,10 +1,10 @@
-import { Button, VerticalDivider } from '/src/components/uikit';
-import { Icon } from '/src/components/uikit/Icon.ts';
+import { VerticalDivider } from '/src/components/uikit';
+import { ActionIcon, Button, Flex } from '@mantine/core';
+import { IconHeart, IconStar } from '@tabler/icons-react';
 import { FC } from 'react';
 import {
   AdditionalInfoContainer, Address, AttractionImage, ButtonsContainer, CardContainer,
 } from './AttractionCard.styled';
-import FavsLogo from '/src/assets/icons/favs.svg';
 
 export const AttractionCard: FC = () => (
   <CardContainer>
@@ -13,15 +13,22 @@ export const AttractionCard: FC = () => (
       <h3>Millennium Bridge</h3>
       <Address>Millennium Bridge</Address>
       <AdditionalInfoContainer>
-        <p>5.0 Rating</p>
+        <Flex align="center" gap={6}>
+          <IconStar size={17} />
+          <p>5.0 Rating</p>
+        </Flex>
         <VerticalDivider />
         <p>Infrastructure</p>
         <VerticalDivider />
         <p>Attraction</p>
       </AdditionalInfoContainer>
       <ButtonsContainer>
-        <Button buttonWidth="100%">Add in trip</Button>
-        <Button variant="secondary" icon={<Icon src={FavsLogo} />} />
+        <Button fullWidth>Add in trip</Button>
+        <Flex justify="center" align="center">
+          <ActionIcon variant="subtle">
+            <IconHeart color="black" />
+          </ActionIcon>
+        </Flex>
       </ButtonsContainer>
     </div>
   </CardContainer>

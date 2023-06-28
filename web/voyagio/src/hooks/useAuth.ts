@@ -6,14 +6,14 @@ export const useAuth = () => {
 
   const handleLogin = async (email: string, password: string) => {
     const response = await axios.post(
-      import.meta.env.VITE_API_URL + '/users/login',
+      `${import.meta.env.VITE_API_URL}/v1/users/login`,
       {
         email,
         password,
       },
       {
         withCredentials: true,
-      }
+      },
     );
 
     if (response.status === 200) {
@@ -25,14 +25,14 @@ export const useAuth = () => {
 
   const handleSignup = async (email: string, password: string) => {
     const response = await axios.post(
-      import.meta.env.VITE_API_URL + '/users/signup',
+      `${import.meta.env.VITE_API_URL}/v1/users/signup`,
       {
         email,
         password,
       },
       {
         withCredentials: true,
-      }
+      },
     );
 
     if (response.status === 200) {

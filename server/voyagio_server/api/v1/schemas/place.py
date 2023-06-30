@@ -3,14 +3,31 @@ from __future__ import annotations
 import uuid
 
 from pydantic import BaseModel
-from typing import Optional
-from .address import AddressResponse, AddressCreate
-from models.place import Place as place_model
+
+from . import category as category_schema
+from . import city as city_schema
+
+
+class AddressCreate(BaseModel):
+    lat: float
+    lon: float
+    city_id: uuid.UUID
+    value: str
+
+
+class Address(BaseModel):
+    lat: float
+    lon: float
+    city: city_schema.City
+    value: str
+
+    class Config:
+        orm_mode = True
 
 
 class PlaceCreate(BaseModel):
     name: str
-    categories_id: list[uuid.UUID]
+    category_id: uuid.UUID
     address: AddressCreate
     image_url: str
     rating: float
@@ -19,15 +36,10 @@ class PlaceCreate(BaseModel):
 class Place(BaseModel):
     id: uuid.UUID
     name: str
-    category: list
-    address: AddressResponse
+    category: category_schema.Category
+    address: Address
     image_url: str
     rating: float
 
-    @staticmethod
-    def from_model(place: place_model) -> Place:
-        address_param = None
-        if place.address is not None:
-            address_param = AddressResponse(id=place.address.id, lat=place.address.lat, lon=place.address.lon,
-                                            value=place.address.value)
-        return Place(id=place.id, name=place.name, address=address_param, category=place.categories, image_url=place.image_url, rating=place.rating)
+    class Config:
+        orm_mode = True

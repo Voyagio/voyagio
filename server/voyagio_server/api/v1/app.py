@@ -1,9 +1,11 @@
 from fastapi.applications import FastAPI
 
-from .routers.user import users_router
-from .routers.place import places_router
 from .routers.category import category_router
+from .routers.city import city_router
 from .routers.collection import collections_router
+from .routers.place import places_router
+from .routers.user import users_router
+from .routers.search import search_router
 
 
 def get_app() -> FastAPI:
@@ -13,4 +15,6 @@ def get_app() -> FastAPI:
     app.include_router(places_router)
     app.include_router(category_router)
     app.include_router(collections_router)
+    app.include_router(city_router)
+    app.include_router(search_router)
     return app

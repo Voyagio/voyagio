@@ -7,9 +7,14 @@ from sqlalchemy.orm import Relationship
 from database import Base
 
 
-PlaceCategory = Table('place_category', Base.metadata,
-                       Column('place_id', UUID, ForeignKey('places.id')),
-                       Column('category_id', UUID, ForeignKey('categories.id')))
+class Address(Base):
+    __tablename__ = "addresses"
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
+    lat = Column(Float, nullable=False)
+    lon = Column(Float, nullable=False)
+    city_id = Column(UUID(as_uuid=True), ForeignKey("cities.id"))
+    city = Relationship("City")
+    value = Column(String, nullable=False)
 
 
 class Place(Base):
@@ -18,5 +23,7 @@ class Place(Base):
     name = Column(String, nullable=False)
     image_url = Column(String)
     rating = Column(Float, default=0)
-    address_id = Column(UUID(as_uuid=True), ForeignKey("adresses.id"))
-    categories = Relationship('Category', secondary='place_category', backref='places')
+    address_id = Column(UUID(as_uuid=True), ForeignKey("addresses.id"))
+    address = Relationship("Address")
+    category_id = Column(UUID(as_uuid=True), ForeignKey("categories.id"))
+    category = Relationship("Category")

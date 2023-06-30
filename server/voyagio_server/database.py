@@ -31,7 +31,7 @@ def setup_database():
 
     from models import user
     from models import place
-    from models import address
+    from models import city
     from models import category
     Base.metadata.create_all(bind=engine)
 

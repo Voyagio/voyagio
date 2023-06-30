@@ -10,9 +10,8 @@ places_router = APIRouter(prefix="/places", tags=["place"])
 
 @places_router.post("", response_model=place_schemas.Place)
 async def create_place(place: place_schemas.PlaceCreate, db: Session = Depends(get_session)):
-    db_place = place_crud.create_place(session=db, place=place)
-
-    return place_schemas.Place.from_model(db_place)
+    place_schema = place_crud.create_place(session=db, place=place)
+    return place_schema
 
 
 @places_router.get("", response_model=list[place_schemas.Place])

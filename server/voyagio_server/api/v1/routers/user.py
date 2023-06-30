@@ -43,7 +43,7 @@ async def sign_up(response: Response, user: user_schemas.UserLogin, db: Session 
 async def login(response: Response, user: user_schemas.UserLogin, db: Session = Depends(get_session)):
     db_user = user_crud.get_user(session=db, email=user.email)
     if not db_user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=401, detail="Incorrect email")
     if not db_user.verify_password(user.password):
         raise HTTPException(status_code=401, detail="Incorrect password")
     set_access_token_cookie(response, access_token=get_user_access_token(db_user.id))

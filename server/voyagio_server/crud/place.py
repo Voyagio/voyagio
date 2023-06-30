@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy.orm import Session
 
 from api.v1.schemas import place as place_schemas
@@ -45,6 +47,19 @@ def create_place(session: Session, place: place_schemas.PlaceCreate) -> place_sc
 
 def get_places(session: Session, offset: int, limit: int):
     places_models = session.query(place_models.Place).offset(offset).limit(limit).all()
+    return [place_schemas.Place(
+        id=place.id,
+        name=place.name,
+        category=place.category,
+        address=place.address,
+        image_url=place.image_url,
+        rating=place.rating
+    ) for place in places_models]
+
+
+def get_city_places(session: Session, city_id: uuid.UUID, offset: int, limit: int):
+    places_models = session.query(place_models.Place).filter(place_models.Place.address.has(city_id=city_id)).offset(
+        offset).limit(limit).all()
     return [place_schemas.Place(
         id=place.id,
         name=place.name,

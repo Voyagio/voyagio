@@ -17,14 +17,25 @@ def create_city(session: Session, city: city_schemas.CityCreate) -> city_schemas
 
 
 def get_cities(session: Session, offset: int, limit: int) -> list[city_schemas.City]:
-    query = session.query(city_models.City)
-    query = query.offset(offset).limit(limit)
-    return [city_schemas.City(id=record.id, name=record.name) for record in query.all()]
+    db_cities = session.query(city_models.City).offset(offset).limit(limit).all()
+    return [city_schemas.City(id=record.id, name=record.name) for record in db_cities]
 
 
-def get_city(session: Session, city_id: uuid.UUID) -> city_schemas.City:
+def get_matching_cities(session: Session, search_string: str) -> list[city_schemas.City]:
+    db_cities = session.query(city_models.City).filter(city_models.City.name.ilike(f"%{search_string}%")).all()
+    return [city_schemas.City(id=record.id, name=record.name) for record in db_cities]
+
+
+def get_city_by_id(session: Session, city_id: uuid.UUID) -> city_schemas.City:
     city_schema = session.query(city_models.City).filter(city_models.City.id == city_id).first()
     return city_schemas.City(id=city_schema.id, name=city_schema.name)
+
+
+def get_city_by_name(session: Session, city_name: str) -> city_schemas.City:
+    db_city = session.query(city_models.City).filter(city_models.City.name == city_name).first()
+    if not db_city:
+        return None
+    return city_schemas.City(id=db_city.id, name=db_city.name)
 
 
 def delete_city(session: Session, city_id: uuid.UUID) -> city_schemas.City | None:

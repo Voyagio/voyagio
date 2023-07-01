@@ -39,20 +39,16 @@ export const FieldContainer = styled.div<FieldContainerProps>`
   background: white;
 `;
 
-interface FieldProps {
-  size: 'large' | 'small'
-}
-
-export const Field = styled.input<FieldProps>`
+export const Field = styled.input`
   font-size: 20px;
   width: 100%;
 
   border: 0;
-  border-bottom: solid ${({ size }) => (size === 'large' ? 1 : 0)}px gray;
+  border-bottom: solid 1px gray;
   
   &:focus {
     outline: none;
-    border-bottom: solid ${({ size }) => (size === 'large' ? 2 : 0)}px black;
+    border-bottom: solid 2px black;
   }
 `;
 

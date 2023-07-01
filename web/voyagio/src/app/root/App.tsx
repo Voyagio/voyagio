@@ -7,6 +7,10 @@ import '@fontsource/lato';
 import '@fontsource/lato/400.css';
 import '@fontsource/lato/400-italic.css';
 
+export type RouterParams = {
+  query: string
+};
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: '/search',
     element: <SearchPage />,
+  },
+  {
+    path: '/search/:query',
+    element: <SearchPage isWithQuery />,
   },
   {
     path: '*',

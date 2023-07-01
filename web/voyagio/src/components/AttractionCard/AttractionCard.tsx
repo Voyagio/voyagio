@@ -6,19 +6,33 @@ import {
   AdditionalInfoContainer, Address, AttractionImage, ButtonsContainer, CardContainer,
 } from './AttractionCard.styled';
 
-export const AttractionCard: FC = () => (
+interface AttractionCardProps {
+  label: string
+  address: string
+  rating: number
+  categoryName: string
+  imageUrl: string
+}
+
+export const AttractionCard: FC<AttractionCardProps> = ({
+  label, address, rating, categoryName, imageUrl,
+}) => (
   <CardContainer>
-    <AttractionImage src="/backgroundSearch.jpg" />
+    <AttractionImage src={imageUrl} />
     <div>
-      <h3>Millennium Bridge</h3>
-      <Address>Millennium Bridge</Address>
+      <h3>{label}</h3>
+      <Address>{address}</Address>
       <AdditionalInfoContainer>
         <Flex align="center" gap={6}>
           <IconStar size={17} />
-          <p>5.0 Rating</p>
+          <p>
+            {rating.toFixed(1)}
+            {' '}
+            Rating
+          </p>
         </Flex>
         <VerticalDivider />
-        <p>Infrastructure</p>
+        <p>{categoryName}</p>
         <VerticalDivider />
         <p>Attraction</p>
       </AdditionalInfoContainer>

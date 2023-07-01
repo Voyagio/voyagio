@@ -17,18 +17,20 @@
     "@mantine/core": "^6.0.14",
     "@mantine/form": "^6.0.14",
     "@mantine/hooks": "^6.0.14",
+    "@tabler/icons-react": "^2.23.0",
     "axios": "^1.4.0",
     "css-filter-converter": "^1.0.109",
-    "@tabler/icons-react": "^2.23.0",
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.13.0",
-    "react-router-dom": "^6.13.0"
+    "react-router-dom": "^6.13.0",
+    "throttle-debounce": "^5.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/throttle-debounce": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "@vitejs/plugin-react": "^4.0.0",

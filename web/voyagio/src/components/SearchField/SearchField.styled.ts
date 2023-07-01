@@ -19,12 +19,16 @@ export const SearchFieldCard = styled.div`
   border-radius: 20px;
 `;
 
-export const FieldContainer = styled.div`
+interface FieldContainerProps {
+  size: 'small' | 'large'
+}
+
+export const FieldContainer = styled.div<FieldContainerProps>`
   display: flex;
   align-items: center;
   
   width: 100%;
-  height: 50px;
+  height: ${({ size }) => (size === 'large' ? 50 : 38)}px;
   
   border-radius: 16px;
   border: 0;
@@ -35,16 +39,20 @@ export const FieldContainer = styled.div`
   background: white;
 `;
 
-export const Field = styled.input`
+interface FieldProps {
+  size: 'large' | 'small'
+}
+
+export const Field = styled.input<FieldProps>`
   font-size: 20px;
   width: 100%;
 
   border: 0;
-  border-bottom: solid 1px gray;
+  border-bottom: solid ${({ size }) => (size === 'large' ? 1 : 0)}px gray;
   
   &:focus {
     outline: none;
-    border-bottom: solid 2px black;
+    border-bottom: solid ${({ size }) => (size === 'large' ? 2 : 0)}px black;
   }
 `;
 
@@ -58,4 +66,16 @@ export const InsideCard = styled.div`
   padding-left: 16px;
   padding-right: 16px;
   width: 100%;
+`;
+
+export const FiledSmallContainer = styled.div`
+  width: 100%;
+  
+  border-radius: 12px;
+  border: #ADB5BD solid 1px;
+`;
+
+export const HintsContainer = styled.div`
+  width: 100%;
+  height: 0;
 `;

@@ -6,13 +6,14 @@ import VoyagioLogo from '/src/assets/logos/voyagio.svg';
 
 interface HeaderProps {
   isWithSearchField?: boolean
+  fieldInitialValue?: string
 }
 
-export const Header: FC<HeaderProps> = ({ isWithSearchField }) => (
+export const Header: FC<HeaderProps> = ({ isWithSearchField, fieldInitialValue }) => (
   <HeaderContainer>
     <Flex gap={20} alignItems="center">
       <Logo alt="Voaygio" src={VoyagioLogo} />
-      {isWithSearchField && <SearchField fieldSize="small" />}
+      {isWithSearchField && <SearchField fieldSize="small" initialValue={fieldInitialValue} />}
     </Flex>
     <Flex gap={12}>
       <CircleImg src="/backgroundSearch.jpg" />

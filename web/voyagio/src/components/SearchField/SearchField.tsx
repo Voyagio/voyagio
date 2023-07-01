@@ -1,5 +1,12 @@
 import {
-  Field, FieldContainer, FiledSmallContainer, HintsContainer, InsideCard, Label, SearchFieldCard,
+  Field,
+  FieldContainer,
+  FiledSmallContainer,
+  HintsContainer,
+  InsideCard,
+  Label,
+  SearchFieldCard,
+  SmallField,
 } from '/src/components/SearchField/SearchField.styled.ts';
 import { Hints } from '/src/components/SearchField/ui';
 import { useSearchFieldController } from '/src/components/SearchField/useSearchFieldController.ts';
@@ -7,9 +14,10 @@ import { FC } from 'react';
 
 interface SearchFieldProps {
   fieldSize: 'large' | 'small'
+  initialValue?: string
 }
 
-export const SearchField: FC<SearchFieldProps> = ({ fieldSize }) => {
+export const SearchField: FC<SearchFieldProps> = ({ fieldSize, initialValue }) => {
   const {
     isHintsShown,
     hints,
@@ -21,7 +29,7 @@ export const SearchField: FC<SearchFieldProps> = ({ fieldSize }) => {
     handleFieldChange,
     visibleFieldValue,
     handleHintClick,
-  } = useSearchFieldController();
+  } = useSearchFieldController(initialValue);
 
   return (
     fieldSize === 'large' ? (
@@ -59,7 +67,7 @@ export const SearchField: FC<SearchFieldProps> = ({ fieldSize }) => {
     ) : (
       <FiledSmallContainer>
         <FieldContainer size="small">
-          <Field
+          <SmallField
             value={visibleFieldValue}
             onChange={handleFieldChange}
             ref={fieldRef}

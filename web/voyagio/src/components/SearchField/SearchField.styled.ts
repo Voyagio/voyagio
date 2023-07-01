@@ -56,6 +56,17 @@ export const Field = styled.input<FieldProps>`
   }
 `;
 
+export const SmallField = styled.input`
+  font-size: 20px;
+  width: 100%;
+
+  border: 0;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const Label = styled.h1`
   margin-top: 0;
   margin-bottom: 16px;

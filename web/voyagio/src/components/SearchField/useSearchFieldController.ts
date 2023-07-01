@@ -7,11 +7,11 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router';
 
-export const useSearchFieldController = () => {
+export const useSearchFieldController = (initialValue?: string) => {
   const { suggestions, fetchSuggestions } = useSuggestions();
 
-  const [fieldValue, setFieldValue] = useState('');
-  const [visibleFieldValue, setVisibleFieldValue] = useState('');
+  const [fieldValue, setFieldValue] = useState(initialValue || '');
+  const [visibleFieldValue, setVisibleFieldValue] = useState(initialValue || '');
 
   const [isHintsShown, setIsHintsShown] = useState(false);
 
@@ -48,7 +48,12 @@ export const useSearchFieldController = () => {
   };
 
   const handleHintClick = (elementFocusPointer: number) => () => {
-    navigate(`/search/${hints[elementFocusPointer - 1].label}`);
+    const chosenValue = hints[elementFocusPointer - 1].label;
+
+    setFieldValue(chosenValue);
+    setVisibleFieldValue(chosenValue);
+
+    navigate(`/search/${chosenValue}`);
     handleBlur();
   };
 

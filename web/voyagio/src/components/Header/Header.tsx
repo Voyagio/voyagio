@@ -3,6 +3,7 @@ import { SearchField } from '/src/components/SearchField';
 import { Flex } from '/src/components/uikit/Flex.ts';
 import { FC } from 'react';
 import VoyagioLogo from '/src/assets/logos/voyagio.svg';
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   isWithSearchField?: boolean
@@ -12,7 +13,7 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = ({ isWithSearchField, fieldInitialValue }) => (
   <HeaderContainer>
     <Flex gap={20} alignItems="center">
-      <Logo alt="Voaygio" src={VoyagioLogo} />
+      <Link to="/search"><Logo alt="Voaygio" src={VoyagioLogo} /></Link>
       {isWithSearchField && <SearchField fieldSize="small" initialValue={fieldInitialValue} />}
     </Flex>
     <Flex gap={12}>

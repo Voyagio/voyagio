@@ -1,5 +1,7 @@
 import { AttractionCard } from '/src/components/AttractionCard';
 import { useResultsController } from '/src/components/Results/useResultsController.ts';
+import { ActionIcon } from '@mantine/core';
+import { IconFilter } from '@tabler/icons-react';
 import { FC } from 'react';
 import {
   CardsGrid, RecommendationsContainer, RecommendationsHeadingContainer,
@@ -12,7 +14,9 @@ export const Results: FC = () => {
     <RecommendationsContainer>
       <RecommendationsHeadingContainer>
         <p>Results:</p>
-        <button>Filter</button>
+        <ActionIcon variant="transparent">
+          <IconFilter color="#0B94F8" />
+        </ActionIcon>
       </RecommendationsHeadingContainer>
       <CardsGrid>
         {results.map(({

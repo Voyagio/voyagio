@@ -19,31 +19,35 @@ export const AttractionCard: FC<AttractionCardProps> = ({
 }) => (
   <CardContainer>
     <AttractionImage src={imageUrl} />
-    <div>
-      <h3>{label}</h3>
-      <Address>{address}</Address>
-      <AdditionalInfoContainer>
-        <Flex align="center" gap={6}>
-          <IconStar size={17} />
-          <p>
-            {rating.toFixed(1)}
-            {' '}
-            Rating
-          </p>
-        </Flex>
-        <VerticalDivider />
-        <p>{categoryName}</p>
-        <VerticalDivider />
-        <p>Attraction</p>
-      </AdditionalInfoContainer>
-      <ButtonsContainer>
-        <Button fullWidth>Add in trip</Button>
-        <Flex justify="center" align="center">
-          <ActionIcon variant="subtle">
-            <IconHeart color="black" />
-          </ActionIcon>
-        </Flex>
-      </ButtonsContainer>
-    </div>
+    <Flex direction="column" justify="space-between">
+      <div>
+        <h3>{label}</h3>
+        <Address>{address}</Address>
+      </div>
+      <div>
+        <AdditionalInfoContainer>
+          <Flex align="center" gap={6}>
+            <IconStar size={17} />
+            <p>
+              {rating.toFixed(1)}
+              {' '}
+              Rating
+            </p>
+          </Flex>
+          <VerticalDivider />
+          <p>{categoryName}</p>
+          <VerticalDivider />
+          <p>Attraction</p>
+        </AdditionalInfoContainer>
+        <ButtonsContainer>
+          <Button fullWidth>Add in trip</Button>
+          <Flex justify="center" align="center">
+            <ActionIcon variant="transparent">
+              <IconHeart color="black" />
+            </ActionIcon>
+          </Flex>
+        </ButtonsContainer>
+      </div>
+    </Flex>
   </CardContainer>
 );

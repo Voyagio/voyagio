@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const CardContainer = styled.div`
-  height: max-content;
+  height: 100%;
   
   display: flex;
   flex-direction: column;
@@ -17,6 +17,10 @@ export const CardContainer = styled.div`
   background-color: white;
 
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 36px 28px -7px rgba(0, 0, 0, 0.05), 0 17px 17px -7px rgba(0, 0, 0, 0.04);
+  
+  & > div {
+    height: 100%;
+  }
 `;
 
 export const AttractionImage = styled.img`

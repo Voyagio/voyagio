@@ -1,3 +1,5 @@
+import uuid
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -19,5 +21,6 @@ async def get_places(offset: int = 0, limit: int = 100, db: Session = Depends(ge
     return place_crud.get_places(session=db, offset=offset, limit=limit)
 
 @places_router.delete("", response_model=str)
-async def remove_places(id: str, db: Session = Depends(get_session)):
-    return place_crud.remove_place_by_id(session=db, id=id)
+async def remove_place(place_id: uuid.UUID, db: Session = Depends(get_session)):
+    place_crud.remove_place_by_id(session=db, id=place_id)
+    return "OK"

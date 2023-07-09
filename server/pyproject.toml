@@ -14,6 +14,7 @@ uvicorn = "^0.22.0"
 psycopg2-binary = "^2.9.6"
 passlib = "^1.7.4"
 pyjwt = "^2.7.0"
+alembic = "^1.11.1"
 
 
 [build-system]

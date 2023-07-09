@@ -16,4 +16,5 @@ class Collection(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     name = Column(String, nullable=False)
     author_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    image_url = Column(String)
     places = Relationship('Place', secondary='collection_place')

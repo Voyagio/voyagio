@@ -12,6 +12,7 @@ def create_user(session: Session, email: str, password: str) -> user_models.User
     session.add(db_user)
     session.commit()
     session.refresh(db_user)
+    print(db_user)
     favorites_collection = create_collection(session, name="Favorites", author_id=db_user.id)
     current_trip_collection = create_collection(session, name="Current Trip", author_id=db_user.id)
     db_user.favorites_collection_id = favorites_collection.id

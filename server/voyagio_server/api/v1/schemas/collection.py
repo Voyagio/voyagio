@@ -8,7 +8,11 @@ from .user import User
 class CollectionBase(BaseModel):
     id: uuid.UUID
     name: str
-    author: User
+    # author: User | None
+    image_url: str | None
+
+    class Config:
+        orm_mode = True
 
 
 class Collection(CollectionBase):

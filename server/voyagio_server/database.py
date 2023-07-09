@@ -24,15 +24,19 @@ SessionLocal = sessionmaker(
 Base = declarative_base()
 
 
+def fetch_metadata():
+    from models import user
+    from models import place
+    from models import city
+    from models import category
+    from models import collection
+
 # noinspection PyUnresolvedReferences
 def setup_database():
     if not database_exists(engine.url):
         create_database(engine.url)
 
-    from models import user
-    from models import place
-    from models import city
-    from models import category
+    fetch_metadata()
     Base.metadata.create_all(bind=engine)
 
 

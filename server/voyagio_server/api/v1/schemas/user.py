@@ -9,6 +9,9 @@ class UserBase(BaseModel):
 class User(UserBase):
     id: uuid.UUID
 
+    class Config:
+        orm_mode = True
+
 
 class UserLogin(UserBase):
     password: str

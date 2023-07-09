@@ -44,6 +44,13 @@ def create_place(session: Session, place: place_schemas.PlaceCreate) -> place_sc
         rating=db_place.rating
     )
 
+def remove_place_by_id(session: Session, id: str):
+    places = session.query(place_models.Place).filter(place_models.Place.id == id).first()
+    if not places:
+        return None
+    session.delete(places)
+    session.commit()
+    return "Succesfully deleted"
 
 def get_places(session: Session, offset: int, limit: int):
     places_models = session.query(place_models.Place).offset(offset).limit(limit).all()

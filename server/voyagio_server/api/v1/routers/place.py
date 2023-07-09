@@ -17,3 +17,7 @@ async def create_place(place: place_schemas.PlaceCreate, db: Session = Depends(g
 @places_router.get("", response_model=list[place_schemas.Place])
 async def get_places(offset: int = 0, limit: int = 100, db: Session = Depends(get_session)):
     return place_crud.get_places(session=db, offset=offset, limit=limit)
+
+@places_router.delete("", response_model=str)
+async def remove_places(id: str, db: Session = Depends(get_session)):
+    return place_crud.remove_place_by_id(session=db, id=id)

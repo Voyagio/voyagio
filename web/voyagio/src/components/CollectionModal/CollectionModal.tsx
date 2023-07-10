@@ -1,4 +1,4 @@
-import { CollectionAttractionCard } from '../CollectionAttractionCard';
+import { FC, PropsWithChildren } from 'react';
 import {
   MapButton,
   ModalContainer,
@@ -8,36 +8,30 @@ import {
   ModalMain,
 } from './CollectionModal.styled';
 
-import colIcon from '/public/col_attr_card_image.png';
 import mapIcon from '/public/map_icon.svg';
 
-export const CollectionModal = () => {
-  const mockInfo = {
-    name: 'Baumana Street',
-    imageUrl: colIcon,
-    address: 'Mazita Gafuri 46, Kazan Russia',
-    rating: 5.0,
-    type: 'Streets',
-    category: 'Attraction',
-  };
+type CollectionModalProps = {
+  title: string;
+  description: string;
+  imageUrl: string;
+};
 
-  const colAttrCards = [1, 2, 3].map((e) => (
-    <CollectionAttractionCard {...mockInfo} key={e} />
-  ));
-
+export const CollectionModal: FC<PropsWithChildren<CollectionModalProps>> = ({
+  title,
+  description,
+  imageUrl,
+  children,
+}) => {
   return (
     <ModalContainer>
       <ModalHeader>
-        <ModalHeaderIcon src={colIcon} />
+        <ModalHeaderIcon src={imageUrl} />
         <ModalHeaderInfo>
-          <h3>Kazan with friends</h3>
-          <p>
-            Team of the Voyagio created this list of attractions that we are
-            planning to visit after our capsrtone project
-          </p>
+          <h3>{title}</h3>
+          <p>{description}</p>
         </ModalHeaderInfo>
       </ModalHeader>
-      <ModalMain>{colAttrCards}</ModalMain>
+      <ModalMain>{children}</ModalMain>
       <MapButton>
         <img src={mapIcon} />
       </MapButton>

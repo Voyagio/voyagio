@@ -24,8 +24,8 @@ def get_recommended_places(available_places: list[place_schemas.Place]):
     return places
 
 
-@search_router.get("/results/{search_string}", response_model=list[collection_schemas.Collection])
-async def get_results(search_string: str, db: Session = Depends(get_session), offset: int = 0, limit: int = 100):
+@search_router.get("/recommendations/{search_string}", response_model=list[collection_schemas.Collection])
+async def get_search_recommendations(search_string: str, db: Session = Depends(get_session)):
     city = city_crud.get_city_by_name(session=db, city_name=search_string)
     if not city:
         return []
@@ -45,3 +45,12 @@ async def get_results(search_string: str, db: Session = Depends(get_session), of
                                                     place_id=place.id)
         result.append(collection)
     return result
+
+
+@search_router.get("/places/{search_string}", response_model=list[place_schemas.Place])
+async def get_search_places(search_string: str, db: Session = Depends(get_session), offset: int = 0, limit: int = 100):
+    city = city_crud.get_city_by_name(session=db, city_name=search_string)
+    if not city:
+        return []
+    places = place_crud.get_city_places(session=db, city_id=city.id, offset=offset, limit=limit)
+    return places

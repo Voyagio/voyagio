@@ -18,3 +18,4 @@ class Collection(Base):
     author_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
     image_url = Column(String)
     places = Relationship('Place', secondary='collection_place')
+    description = Column(String, nullable=False, default="")

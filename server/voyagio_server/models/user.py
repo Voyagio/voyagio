@@ -14,7 +14,6 @@ class User(Base):
     email = Column(String, nullable=False, unique=True)
     hashed_password = Column(String)
     favorites_collection_id = Column(UUID(as_uuid=True), ForeignKey("collections.id"))
-    current_trip_collection_id = Column(UUID(as_uuid=True), ForeignKey("collections.id"))
 
     def set_password(self, password: str):
         self.hashed_password = pbkdf2_sha256.hash(password)

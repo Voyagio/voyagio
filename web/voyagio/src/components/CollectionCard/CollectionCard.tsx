@@ -2,7 +2,7 @@ import {
   CollectionCardContainer,
   CollectionImage,
   CollectionInfo,
-} from './CollectionCard.style';
+} from './CollectionCard.styled';
 
 import { CollectionModal } from '../CollectionModal';
 import { useDisclosure } from '@mantine/hooks';

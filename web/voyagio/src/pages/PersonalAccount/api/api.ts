@@ -20,11 +20,27 @@ export interface FavouriteDTO {
   rating: number;
 }
 
+export interface CollectionDTO {
+  id: string;
+  name: string;
+  image_url: string;
+}
+
 type FavouritesDTO = FavouriteDTO[];
+type CollectionsDTO = CollectionDTO[];
 
 export const getFavourites = async (): Promise<FavouritesDTO> => {
   const response = await axios.get<FavouritesDTO>(
-    `${import.meta.env.VITE_API_URL}/collections/favourites`
+    `${import.meta.env.VITE_API_URL}/v1/collections/favourites`,
+    { withCredentials: true }
+  );
+  return response.data;
+};
+
+export const getUserCollections = async (): Promise<CollectionsDTO> => {
+  const response = await axios.get<CollectionsDTO>(
+    `${import.meta.env.VITE_API_URL}/v1/collections`,
+    { withCredentials: true }
   );
   return response.data;
 };

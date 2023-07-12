@@ -14,3 +14,9 @@ export const AccountMainContainer = styled.main`
   gap: 20px;
   padding: 0 50px;
 `;
+
+export const CollectionsGrid = styled.div`
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(433px, auto));
+`;

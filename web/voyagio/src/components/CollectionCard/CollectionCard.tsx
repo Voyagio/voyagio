@@ -1,4 +1,3 @@
-import { Modal } from '@mantine/core';
 import {
   CollectionCardContainer,
   CollectionImage,
@@ -11,6 +10,7 @@ import { FC } from 'react';
 import { useCollectionPlaces } from './api';
 import { CollectionAttractionCard } from '../CollectionAttractionCard';
 import { CollectionContext } from '/src/contexts/collectionContext';
+import { StyledModal } from '../StyledModal';
 
 type CollectionCardProps = {
   id: string;
@@ -29,20 +29,7 @@ export const CollectionCard: FC<CollectionCardProps> = ({
   const { collectionPlaces } = useCollectionPlaces(id);
   return (
     <>
-      <Modal
-        opened={opened}
-        onClose={close}
-        withCloseButton={false}
-        size="auto"
-        padding={0}
-        radius={20}
-        overlayProps={{
-          blur: '2.5px',
-          color: '#4e4e4e',
-          opacity: 0.15,
-        }}
-        centered
-      >
+      <StyledModal opened={opened} onClose={close}>
         <CollectionModal
           title={title}
           description={description}
@@ -63,7 +50,7 @@ export const CollectionCard: FC<CollectionCardProps> = ({
             ))}
           </CollectionContext.Provider>
         </CollectionModal>
-      </Modal>
+      </StyledModal>
 
       <CollectionCardContainer onClick={open}>
         <CollectionImage src={imageUrl} />

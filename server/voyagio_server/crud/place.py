@@ -68,12 +68,24 @@ def get_places(session: Session, offset: int, limit: int):
     ) for place in places_models]
 
 
-def get_city_places(session: Session, city_id: uuid.UUID, offset: int, limit: int):
-    places_models = session.query(place_models.Place).filter(
+def get_city_places(
+        session: Session,
+        city_id: uuid.UUID,
+        min_rating: float,
+        max_rating: float,
+        category_ids: list[uuid.UUID],
+        offset: int, limit: int
+):
+    filter_queries = [
         place_models.Place.rating > 0,
         place_models.Place.image_url != "",
-        place_models.Place.address.has(city_id=city_id)
-    ).offset(offset).limit(limit).all()
+        place_models.Place.address.has(city_id=city_id),
+        place_models.Place.rating >= min_rating,
+        place_models.Place.rating <= max_rating
+    ]
+    if category_ids:
+        filter_queries.append(place_models.Place.category_id.in_(category_ids))
+    places_models = session.query(place_models.Place).filter(*filter_queries).offset(offset).limit(limit).all()
     return [place_schemas.Place(
         id=place.id,
         name=place.name,

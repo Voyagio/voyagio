@@ -52,8 +52,3 @@ async def remove_place_from_collection(place: collection_schemas.CollectionAddPl
 @collections_router.get("/favorites", response_model=collection_schemas.Collection)
 async def get_favorites_collection(user: User = Depends(get_current_user), db: Session = Depends(get_session)):
     return collection_crud.get_collection(session=db, collection_id=user.favorites_collection_id)
-
-
-@collections_router.get("/current-trip", response_model=collection_schemas.Collection)
-async def get_current_trip_collection(user: User = Depends(get_current_user), db: Session = Depends(get_session)):
-    return collection_crud.get_collection(session=db, collection_id=user.current_trip_collection_id)

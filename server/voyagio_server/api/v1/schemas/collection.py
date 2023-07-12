@@ -10,15 +10,20 @@ class CollectionBase(BaseModel):
     name: str
     # author: User | None
     image_url: str | None
-    description: str | None
-
-    @validator('description', always=True)
-    def set_name(cls, description):
-        if description is None: return ""
-        return description
+    description: str = ""
 
     class Config:
         orm_mode = True
+
+
+class CollectionCreate(BaseModel):
+    name: str
+    description: str = ""
+    image_url: str | None
+
+
+class CollectionUpdate(CollectionCreate):
+    pass
 
 
 class Collection(CollectionBase):

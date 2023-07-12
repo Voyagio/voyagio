@@ -15,8 +15,10 @@ import {
 import StarIcon from '/public/rating_star.svg';
 import CloseBtnIcon from '/public/close_button_icon.svg';
 import { FC } from 'react';
+import { useDeletePlaceHandler } from './useDeletePlaceHandler';
 
 type CollectionAttractionCardProps = {
+  id: string;
   name: string;
   imageUrl: string;
   address: string;
@@ -26,6 +28,7 @@ type CollectionAttractionCardProps = {
 };
 
 export const CollectionAttractionCard: FC<CollectionAttractionCardProps> = ({
+  id,
   name,
   imageUrl,
   address,
@@ -33,9 +36,10 @@ export const CollectionAttractionCard: FC<CollectionAttractionCardProps> = ({
   type,
   category,
 }) => {
+  const { deletePlaceHandler } = useDeletePlaceHandler(id);
   return (
     <CollectionAttractionCardContainer>
-      <CloseButton>
+      <CloseButton onClick={deletePlaceHandler}>
         <img src={CloseBtnIcon} alt="btn" />
       </CloseButton>
       <CardImage src={imageUrl} alt="bg" />

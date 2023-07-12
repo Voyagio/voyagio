@@ -10,6 +10,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { FC } from 'react';
 import { useCollectionPlaces } from './api';
 import { CollectionAttractionCard } from '../CollectionAttractionCard';
+import { CollectionContext } from '/src/contexts/collectionContext';
 
 type CollectionCardProps = {
   id: string;
@@ -47,16 +48,20 @@ export const CollectionCard: FC<CollectionCardProps> = ({
           description={description}
           imageUrl={imageUrl}
         >
-          {collectionPlaces.map((item) => (
-            <CollectionAttractionCard
-              name={item.name}
-              imageUrl={item.image_url}
-              address={item.address.value}
-              rating={item.rating}
-              type={item.category.name}
-              category={item.category.name}
-            />
-          ))}
+          <CollectionContext.Provider value={id}>
+            {collectionPlaces.map((item) => (
+              <CollectionAttractionCard
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                imageUrl={item.image_url}
+                address={item.address.value}
+                rating={item.rating}
+                type={item.category.name}
+                category={item.category.name}
+              />
+            ))}
+          </CollectionContext.Provider>
         </CollectionModal>
       </Modal>
 

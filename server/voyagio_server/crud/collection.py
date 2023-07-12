@@ -21,6 +21,28 @@ def create_collection(
     return db_collection
 
 
+def delete_collection(session: Session, collection_id: uuid.UUID):
+    session.query(collection_models.Collection).filter(collection_models.Collection.id == collection_id).delete()
+    session.commit()
+
+
+def update_collection(session: Session,
+                      collection_id: uuid.UUID,
+                      name: str = None,
+                      image_url: str = None,
+                      description: str = None):
+    db_collection = session.query(collection_models.Collection).get(collection_id)
+    if name:
+        db_collection.name = name
+    if image_url:
+        db_collection.image_url = image_url
+    if description:
+        db_collection.description = description
+    session.commit()
+    session.refresh(db_collection)
+    return db_collection
+
+
 def get_collection_places(session: Session, collection_id: uuid.UUID):
     return session.query(collection_models.Collection).get(collection_id).places
 

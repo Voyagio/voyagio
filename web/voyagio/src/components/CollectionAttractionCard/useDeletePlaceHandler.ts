@@ -3,7 +3,7 @@ import { CollectionContext } from '/src/contexts/collectionContext';
 import { removePlace } from './api';
 
 export const useDeletePlaceHandler = (placeId: string) => {
-  const collectionId = useContext(CollectionContext);
+  const { id: collectionId } = useContext(CollectionContext);
 
   const deletePlaceHandler = async () => {
     await removePlace(collectionId, placeId);

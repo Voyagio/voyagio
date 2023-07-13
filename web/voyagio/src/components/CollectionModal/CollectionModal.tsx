@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useState } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import {
   CloseButton,
   EditButton,
@@ -11,49 +11,71 @@ import {
   ModalTitleContainer,
   NewModalButtonGroup,
   NewModalContainer,
+  NewModalImage,
+  ReshuffleButton,
 } from './CollectionModal.styled';
 
 import mapIcon from '/public/map_icon.svg';
 import editIcon from '/public/edit_icon.svg';
-import { Button, TextInput } from '@mantine/core';
+import reshuffleIcon from '/public/reshuffle_icon.svg';
+import { Button, TextInput, Textarea } from '@mantine/core';
 import { useToggleEdit } from './useToggleEdit';
+import { useNewModalInfo } from './useNewModalInfo';
 
 interface ICollectionModalComposition {
   New: FC<CollectionModalNewProps>;
 }
 
 type CollectionModalNewProps = {
-  onSubmit: (name: string, description: string) => void;
+  onSubmit: (name: string, description: string, imageUrl: string) => void;
   onClose: () => void;
 };
 
 const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
+  const {
+    title,
+    description,
+    imageUrl,
+    handleReshuffle,
+    handleTitleChange,
+    handleDescriptionChange,
+  } = useNewModalInfo();
 
   return (
     <NewModalContainer>
+      <NewModalImage src={imageUrl}>
+        <ReshuffleButton onClick={handleReshuffle}>
+          <img src={reshuffleIcon} />
+        </ReshuffleButton>
+      </NewModalImage>
       <TextInput
         label="Name of the collection"
         placeholder="Trip with friends"
         radius="lg"
         size="lg"
         variant="default"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={title}
+        onChange={handleTitleChange}
+        styles={{ input: { fontSize: '14px', fontFamily: 'Lato, sans-serif' } }}
       />
-      <TextInput
+      <Textarea
         label="Description"
-        placeholder="Team of the Voyagio created this list of attractions that we are planning to visit after our capsrtone project"
+        placeholder="Team of the Voyagio created this list of attractions that we are planning to visit"
         radius="lg"
         size="lg"
         variant="default"
-        value={desc}
-        onChange={(e) => setDesc(e.target.value)}
+        value={description}
+        onChange={handleDescriptionChange}
+        styles={{
+          input: { fontSize: '14px', fontFamily: 'Lato, sans-serif' },
+        }}
       />
 
       <NewModalButtonGroup>
-        <Button onClick={() => onSubmit(name, desc)} fullWidth>
+        <Button
+          onClick={() => onSubmit(title, description, imageUrl)}
+          fullWidth
+        >
           Save
         </Button>
         <CloseButton color="dark" variant="subtle" onClick={onClose} fullWidth>
@@ -64,20 +86,10 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
   );
 };
 
-type CollectionModalProps = {
-  title: string;
-  description: string;
-  imageUrl: string;
-};
-
-export const CollectionModal: FC<PropsWithChildren<CollectionModalProps>> &
-  ICollectionModalComposition = ({
-  title,
-  description,
-  imageUrl,
-  children,
-}) => {
-  const { toggleEdit, handleSubmit, toggle } = useToggleEdit();
+export const CollectionModal: FC<PropsWithChildren> &
+  ICollectionModalComposition = ({ children }) => {
+  const { toggleEdit, handleSubmit, toggle, rest } = useToggleEdit();
+  const { title, description, imageUrl } = rest;
   return toggleEdit ? (
     <New onSubmit={handleSubmit} onClose={toggle} />
   ) : (

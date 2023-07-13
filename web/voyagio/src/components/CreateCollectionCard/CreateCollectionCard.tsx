@@ -3,8 +3,9 @@ import { CreateColCardContainer } from './CreateCollectionCard.styled';
 
 import plusIcon from '/public/col_card_plus.svg';
 import { CollectionModal } from '../CollectionModal';
-import { postNewCollection } from './api';
+import { getRandomCollectionImage, postNewCollection } from './api';
 import { StyledModal } from '../StyledModal';
+import { CollectionContext } from '/src/contexts/collectionContext';
 
 export const CreateCollectionCard = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -17,7 +18,16 @@ export const CreateCollectionCard = () => {
   return (
     <>
       <StyledModal opened={opened} onClose={close}>
-        <CollectionModal.New onSubmit={handleSubmit} onClose={close} />
+        <CollectionContext.Provider
+          value={{
+            id: '',
+            title: '',
+            description: '',
+            imageUrl: getRandomCollectionImage(),
+          }}
+        >
+          <CollectionModal.New onSubmit={handleSubmit} onClose={close} />
+        </CollectionContext.Provider>
       </StyledModal>
       <CreateColCardContainer onClick={open}>
         <img src={plusIcon} />

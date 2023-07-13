@@ -1,12 +1,5 @@
 import axios from 'axios';
 
-export interface UserCollectionDTO {
-  id: string;
-  name: string;
-  image_url: string;
-  description: string;
-}
-
 export interface CollectionPlaceDTO {
   id: string;
   name: string;
@@ -27,15 +20,7 @@ export interface CollectionPlaceDTO {
   rating: number;
 }
 
-type UserCollectionsDTO = UserCollectionDTO[];
 type CollectionPlacesDTO = CollectionPlaceDTO[];
-
-export const getUserCollections = async () => {
-  const res = await axios.get<UserCollectionsDTO>(
-    `${import.meta.env.VITE_API_URL}/v1/collections`
-  );
-  return res.data;
-};
 
 export const getCollectionPlaces = async (id: string) => {
   const res = await axios.get<CollectionPlacesDTO>(

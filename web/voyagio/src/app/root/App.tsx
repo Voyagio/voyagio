@@ -6,9 +6,10 @@ import { AuthPage } from '/src/pages/AuthPage';
 import '@fontsource/lato';
 import '@fontsource/lato/400.css';
 import '@fontsource/lato/400-italic.css';
+import { PersonalAccount } from '/src/pages/PersonalAccount';
 
 export type RouterParams = {
-  query: string
+  query: string;
 };
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/search/:query',
     element: <SearchPage isWithQuery />,
+  },
+  {
+    path: '/account',
+    element: <PersonalAccount />,
   },
   {
     path: '*',

@@ -2,7 +2,7 @@ import {
   CollectionCardContainer,
   CollectionImage,
   CollectionInfo,
-} from './CollectionCard.style';
+} from './CollectionCard.styled';
 
 import { CollectionModal } from '../CollectionModal';
 import { useDisclosure } from '@mantine/hooks';
@@ -30,12 +30,10 @@ export const CollectionCard: FC<CollectionCardProps> = ({
   return (
     <>
       <StyledModal opened={opened} onClose={close}>
-        <CollectionModal
-          title={title}
-          description={description}
-          imageUrl={imageUrl}
+        <CollectionContext.Provider
+          value={{ id, title, description, imageUrl }}
         >
-          <CollectionContext.Provider value={id}>
+          <CollectionModal>
             {collectionPlaces.map((item) => (
               <CollectionAttractionCard
                 key={item.id}
@@ -48,8 +46,8 @@ export const CollectionCard: FC<CollectionCardProps> = ({
                 category={item.category.name}
               />
             ))}
-          </CollectionContext.Provider>
-        </CollectionModal>
+          </CollectionModal>
+        </CollectionContext.Provider>
       </StyledModal>
 
       <CollectionCardContainer onClick={open}>

@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import { Button, ButtonProps, createPolymorphicComponent } from '@mantine/core';
 
+type NewModalImageProps = {
+  src: string;
+};
+
 export const ModalContainer = styled.div`
   position: relative;
   display: flex;
@@ -84,6 +88,26 @@ export const NewModalContainer = styled.div`
 export const NewModalButtonGroup = styled.div`
   display: flex;
   gap: 20px;
+`;
+
+export const NewModalImage = styled.div<NewModalImageProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+`;
+
+export const ReshuffleButton = styled.button`
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
 `;
 
 const _CloseButton = styled(Button)`

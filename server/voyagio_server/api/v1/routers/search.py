@@ -24,7 +24,7 @@ def get_recommended_places(available_places: list[place_schemas.Place]):
     return places
 
 
-@search_router.get("/recommendations/{search_string}", response_model=list[collection_schemas.Collection])
+@search_router.post("/recommendations/{search_string}", response_model=list[collection_schemas.Collection])
 async def get_search_recommendations(search_string: str, db: Session = Depends(get_session)):
     city = city_crud.get_city_by_name(session=db, city_name=search_string)
     if not city:
@@ -47,10 +47,19 @@ async def get_search_recommendations(search_string: str, db: Session = Depends(g
     return result
 
 
-@search_router.get("/places/{search_string}", response_model=list[place_schemas.Place])
-async def get_search_places(search_string: str, db: Session = Depends(get_session), offset: int = 0, limit: int = 100):
+@search_router.post("/places/{search_string}", response_model=list[place_schemas.Place])
+async def get_search_places(search_string: str,
+                            search_filter: search_schemas.SearchFilter,
+                            db: Session = Depends(get_session), offset: int = 0, limit: int = 100):
     city = city_crud.get_city_by_name(session=db, city_name=search_string)
     if not city:
         return []
-    places = place_crud.get_city_places(session=db, city_id=city.id, offset=offset, limit=limit)
+    places = place_crud.get_city_places(
+        session=db,
+        city_id=city.id,
+        min_rating=search_filter.rating_filter.min_rating,
+        max_rating=search_filter.rating_filter.max_rating,
+        category_ids=search_filter.category_filter.category_ids,
+        offset=offset, limit=limit
+    )
     return places

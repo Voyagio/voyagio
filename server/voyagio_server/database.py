@@ -30,6 +30,7 @@ def fetch_metadata():
     from models import city
     from models import category
     from models import collection
+    from models import user_favorite_category
 
 # noinspection PyUnresolvedReferences
 def setup_database():

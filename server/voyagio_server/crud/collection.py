@@ -11,10 +11,33 @@ def get_user_collections(session: Session, user_id: uuid.UUID):
 
 
 def create_collection(
-        session: Session, name: str, author_id: uuid.UUID = None, image_url: str = None
+        session: Session, name: str, author_id: uuid.UUID = None, image_url: str = None, description=None
 ) -> collection_models.Collection:
-    db_collection = collection_models.Collection(name=name, author_id=author_id, image_url=image_url)
+    db_collection = collection_models.Collection(name=name, author_id=author_id, image_url=image_url,
+                                                 description=description)
     session.add(db_collection)
+    session.commit()
+    session.refresh(db_collection)
+    return db_collection
+
+
+def delete_collection(session: Session, collection_id: uuid.UUID):
+    session.query(collection_models.Collection).filter(collection_models.Collection.id == collection_id).delete()
+    session.commit()
+
+
+def update_collection(session: Session,
+                      collection_id: uuid.UUID,
+                      name: str = None,
+                      image_url: str = None,
+                      description: str = None):
+    db_collection = session.query(collection_models.Collection).get(collection_id)
+    if name:
+        db_collection.name = name
+    if image_url:
+        db_collection.image_url = image_url
+    if description:
+        db_collection.description = description
     session.commit()
     session.refresh(db_collection)
     return db_collection

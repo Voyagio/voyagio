@@ -12,11 +12,47 @@ from models.user import User
 
 collections_router = APIRouter(prefix="/collections", tags=["collection"])
 
-
 @collections_router.get("", response_model=list[collection_schemas.Collection])
 async def get_user_collections(user: User = Depends(get_current_user), db: Session = Depends(get_session)):
     db_collections = collection_crud.get_user_collections(session=db, user_id=user.id)
     return db_collections
+
+@collections_router.post("", response_model=collection_schemas.Collection)
+async def create_user_collection(
+        collection: collection_schemas.CollectionCreate,
+        user: User = Depends(get_current_user),
+        db: Session = Depends(get_session)
+):
+    db_collection = collection_crud.create_collection(
+        session=db,
+        name=collection.name,
+        author_id=user.id,
+        image_url=collection.image_url,
+        description=collection.description
+    )
+    return db_collection
+
+
+@collections_router.patch("/{collection_id}", response_model=collection_schemas.Collection)
+async def edit_user_collection(
+        collection: collection_schemas.CollectionUpdate,
+        collection_id: uuid.UUID,
+        db: Session = Depends(get_session)
+):
+    db_collection = collection_crud.update_collection(
+        session=db,
+        collection_id=collection_id,
+        name=collection.name,
+        image_url=collection.image_url,
+        description=collection.description
+    )
+    return db_collection
+
+
+@collections_router.delete("/{collection_id}")
+async def delete_user_collection(collection_id: uuid.UUID, db: Session = Depends(get_session)):
+    collection_crud.delete_collection(session=db, collection_id=collection_id)
+    return "OK"
 
 
 @collections_router.get("/{collection_id}/places", response_model=list[place_schemas.Place])
@@ -52,8 +88,3 @@ async def remove_place_from_collection(place: collection_schemas.CollectionAddPl
 @collections_router.get("/favorites", response_model=collection_schemas.Collection)
 async def get_favorites_collection(user: User = Depends(get_current_user), db: Session = Depends(get_session)):
     return collection_crud.get_collection(session=db, collection_id=user.favorites_collection_id)
-
-
-@collections_router.get("/current-trip", response_model=collection_schemas.Collection)
-async def get_current_trip_collection(user: User = Depends(get_current_user), db: Session = Depends(get_session)):
-    return collection_crud.get_collection(session=db, collection_id=user.current_trip_collection_id)

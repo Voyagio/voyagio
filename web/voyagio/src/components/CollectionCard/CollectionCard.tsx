@@ -30,12 +30,10 @@ export const CollectionCard: FC<CollectionCardProps> = ({
   return (
     <>
       <StyledModal opened={opened} onClose={close}>
-        <CollectionContext.Provider value={id}>
-          <CollectionModal
-            title={title}
-            description={description}
-            imageUrl={imageUrl}
-          >
+        <CollectionContext.Provider
+          value={{ id, title, description, imageUrl }}
+        >
+          <CollectionModal>
             {collectionPlaces.map((item) => (
               <CollectionAttractionCard
                 key={item.id}

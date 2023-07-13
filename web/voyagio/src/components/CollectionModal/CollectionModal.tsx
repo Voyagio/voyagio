@@ -56,6 +56,7 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
         variant="default"
         value={title}
         onChange={handleTitleChange}
+        styles={{ input: { fontSize: '14px', fontFamily: 'Lato, sans-serif' } }}
       />
       <Textarea
         label="Description"
@@ -65,6 +66,9 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
         variant="default"
         value={description}
         onChange={handleDescriptionChange}
+        styles={{
+          input: { fontSize: '14px', fontFamily: 'Lato, sans-serif' },
+        }}
       />
 
       <NewModalButtonGroup>

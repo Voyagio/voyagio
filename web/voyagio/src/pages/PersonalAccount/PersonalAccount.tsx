@@ -15,12 +15,12 @@ import { CollectionCard } from '/src/components/CollectionCard';
 import { CreateCollectionCard } from '/src/components/CreateCollectionCard';
 
 export const PersonalAccount: FC = () => {
-  const { favourites, collections } = useUserData();
+  const { favourites, collections, userCredentials } = useUserData();
   return (
     <AccountPageContainer>
       <Header isWithSearchField />
       <AccountMainContainer>
-        <AccountInfo />
+        <AccountInfo email={userCredentials.email} />
         <StyledTabs>
           <Tabs.List>
             <Tabs.Tab value="fav">Favourites</Tabs.Tab>

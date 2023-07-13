@@ -7,13 +7,17 @@ import {
 
 import avatar from '/public/default_avatar.png';
 
-export const AccountInfo: FC = () => {
+type AccountInfoProps = {
+  email: string;
+};
+
+export const AccountInfo: FC<AccountInfoProps> = ({ email }) => {
   return (
     <AccountInfoContainer>
       <AccountAvatar src={avatar} />
       <InfoContainer>
         <h3>
-          Hello, <span>Alexandra</span>!
+          Hello, <span>{email}</span>!
         </h3>
         <p>Russia, Innopolis</p>
       </InfoContainer>

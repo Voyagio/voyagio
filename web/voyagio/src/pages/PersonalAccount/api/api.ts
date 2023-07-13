@@ -26,6 +26,11 @@ export interface CollectionDTO {
   image_url: string;
 }
 
+export interface UserCredentials {
+  id: string;
+  email: string;
+}
+
 type FavouritesDTO = FavouriteDTO[];
 type CollectionsDTO = CollectionDTO[];
 
@@ -42,5 +47,14 @@ export const getUserCollections = async (): Promise<CollectionsDTO> => {
     `${import.meta.env.VITE_API_URL}/v1/collections`,
     { withCredentials: true }
   );
+  return response.data;
+};
+
+export const getUserCredentials = async (): Promise<UserCredentials> => {
+  const response = await axios.get<UserCredentials>(
+    `${import.meta.env.VITE_API_URL}/v1/users/me`,
+    { withCredentials: true }
+  );
+
   return response.data;
 };

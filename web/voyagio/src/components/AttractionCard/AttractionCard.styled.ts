@@ -36,7 +36,7 @@ export const AttractionImage = styled.img`
 
 export const Address = styled.p`
   color: #adb5bd;
-  font-weight: 300;
+  font-weight: 400;
 `;
 
 export const AdditionalInfoContainer = styled.div`

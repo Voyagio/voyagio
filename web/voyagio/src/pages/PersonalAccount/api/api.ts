@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export interface FavouriteDTO {
+export interface FavoriteDTO {
   id: string;
   name: string;
   category: {
@@ -31,23 +31,23 @@ export interface UserCredentials {
   email: string;
 }
 
-type FavouritesDTO = FavouriteDTO[];
+type FavoritesDTO = FavoriteDTO[];
 type CollectionsDTO = CollectionDTO[];
 
-export const getFavourites = async (): Promise<FavouritesDTO> => {
+export const getFavorites = async (): Promise<FavoritesDTO> => {
   const collectionResponse = await axios.get<CollectionDTO>(
-    `${import.meta.env.VITE_API_URL}/v1/collections/favourites`,
+    `${import.meta.env.VITE_API_URL}/v1/collections/favorites`,
     { withCredentials: true }
   );
 
   const collectionId = collectionResponse.data.id;
 
-  const favouritesResponse = await axios.get<FavouritesDTO>(
-    `${import.meta.env.VITE_API_URL}/v1/collctions/${collectionId}/places`,
+  const favoritesResponse = await axios.get<FavoritesDTO>(
+    `${import.meta.env.VITE_API_URL}/v1/collections/${collectionId}/places`,
     { withCredentials: true }
   );
 
-  return favouritesResponse.data;
+  return favoritesResponse.data;
 };
 
 export const getUserCollections = async (): Promise<CollectionsDTO> => {

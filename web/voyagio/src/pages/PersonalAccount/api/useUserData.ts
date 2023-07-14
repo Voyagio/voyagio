@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import {
   CollectionDTO,
-  FavouriteDTO,
+  FavoriteDTO,
   UserCredentials,
-  getFavourites,
+  getFavorites,
   getUserCollections,
   getUserCredentials,
 } from './api';
 
 export const useUserData = () => {
-  const [favourites, setFavourites] = useState<FavouriteDTO[]>([]);
+  const [favorites, setFavorites] = useState<FavoriteDTO[]>([]);
   const [collections, setCollections] = useState<CollectionDTO[]>([]);
   const [userCredentials, setUserCredentials] = useState<UserCredentials>({
     id: '',
     email: '',
   });
 
-  const fetchFavourites = async () => {
-    setFavourites(await getFavourites());
+  const fetchFavorites = async () => {
+    setFavorites(await getFavorites());
   };
 
   const fetchCollections = async () => {
@@ -29,8 +29,8 @@ export const useUserData = () => {
   };
 
   const fetchUserData = async () => {
-    await Promise.all([
-      fetchFavourites(),
+    await Promise.allSettled([
+      fetchFavorites(),
       fetchCollections(),
       fetchUserCredentials(),
     ]);
@@ -40,5 +40,10 @@ export const useUserData = () => {
     fetchUserData().then();
   }, []);
 
-  return { favourites, collections, userCredentials, fetchUserData } as const;
+  return {
+    favorites,
+    collections,
+    userCredentials,
+    fetchUserData,
+  } as const;
 };

@@ -1,5 +1,6 @@
 import uuid
 
+from passlib.hash import pbkdf2_sha256
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Relationship

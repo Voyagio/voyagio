@@ -35,11 +35,19 @@ type FavouritesDTO = FavouriteDTO[];
 type CollectionsDTO = CollectionDTO[];
 
 export const getFavourites = async (): Promise<FavouritesDTO> => {
-  const response = await axios.get<FavouritesDTO>(
+  const collectionResponse = await axios.get<CollectionDTO>(
     `${import.meta.env.VITE_API_URL}/v1/collections/favourites`,
     { withCredentials: true }
   );
-  return response.data;
+
+  const collectionId = collectionResponse.data.id;
+
+  const favouritesResponse = await axios.get<FavouritesDTO>(
+    `${import.meta.env.VITE_API_URL}/v1/collctions/${collectionId}/places`,
+    { withCredentials: true }
+  );
+
+  return favouritesResponse.data;
 };
 
 export const getUserCollections = async (): Promise<CollectionsDTO> => {

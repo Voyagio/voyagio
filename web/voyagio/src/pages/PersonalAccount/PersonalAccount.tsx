@@ -15,7 +15,7 @@ import { CollectionCard } from '/src/components/CollectionCard';
 import { CreateCollectionCard } from '/src/components/CreateCollectionCard';
 
 export const PersonalAccount: FC = () => {
-  const { favourites, collections, userCredentials } = useUserData();
+  const { favorites, collections, userCredentials } = useUserData();
   return (
     <AccountPageContainer>
       <Header isWithSearchField />
@@ -30,7 +30,7 @@ export const PersonalAccount: FC = () => {
 
           <Tabs.Panel value="fav" pt={43}>
             <CardsGrid>
-              {favourites.map((item) => (
+              {favorites.map((item) => (
                 <AttractionCard
                   key={item.id}
                   label={item.name}

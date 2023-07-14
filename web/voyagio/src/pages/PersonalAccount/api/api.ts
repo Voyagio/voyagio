@@ -23,6 +23,7 @@ export interface FavoriteDTO {
 export interface CollectionDTO {
   id: string;
   name: string;
+  description: string;
   image_url: string;
 }
 

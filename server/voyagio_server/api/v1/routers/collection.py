@@ -15,7 +15,11 @@ collections_router = APIRouter(prefix="/collections", tags=["collection"])
 @collections_router.get("", response_model=list[collection_schemas.Collection])
 async def get_user_collections(user: User = Depends(get_current_user), db: Session = Depends(get_session)):
     db_collections = collection_crud.get_user_collections(session=db, user_id=user.id)
-    return db_collections
+    db_collections_filtered = list(filter(
+        lambda collection: collection.id != user.favorites_collection_id,
+        db_collections
+    ))
+    return db_collections_filtered
 
 @collections_router.post("", response_model=collection_schemas.Collection)
 async def create_user_collection(

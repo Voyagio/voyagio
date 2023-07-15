@@ -24,7 +24,8 @@ export const CardContainer = styled.div`
 `;
 
 export const AttractionImage = styled.img`
-  height: 271px;
+  min-height: 271px;
+  max-height: 271px;
   margin-left: -16px;
   margin-right: -16px;
   

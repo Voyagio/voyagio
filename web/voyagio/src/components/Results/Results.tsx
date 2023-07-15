@@ -8,16 +8,21 @@ import {
 } from '/src/components/Results/Results.styled.ts';
 
 export const Results: FC = () => {
-  const { results } = useResultsController();
+  const { results, cityName } = useResultsController();
 
   return (
     <RecommendationsContainer>
       <RecommendationsHeadingContainer>
-        <p>Results:</p>
+        <h2>
+          Results for
+          {' '}
+          {cityName}
+        </h2>
         <ActionIcon variant="transparent">
           <IconFilter color="#0B94F8" />
         </ActionIcon>
       </RecommendationsHeadingContainer>
+      <p>Try personal list of places where to go: </p>
       <CardsGrid>
         {results.map(({
           rating,

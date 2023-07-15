@@ -10,6 +10,12 @@ export const RecommendationsHeadingContainer = styled.div`
   display: flex;
   font-weight: 700;
   justify-content: space-between;
+  
+  align-items: center;
+  
+  & > h2 {
+    font-weight: 400;
+  }
 `;
 
 export const CardsGrid = styled.div`

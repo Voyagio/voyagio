@@ -4,7 +4,8 @@ import { useParams } from 'react-router';
 
 export const useResultsController = () => {
   const params = useParams<RouterParams>();
-  const { results } = useResults(params.query);
+  const cityName = params.query;
+  const { results } = useResults(cityName);
 
-  return { results } as const;
+  return { results, cityName } as const;
 };

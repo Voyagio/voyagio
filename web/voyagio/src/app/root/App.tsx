@@ -1,3 +1,4 @@
+import { Interests } from '/src/pages/Interests';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Main } from '/src/pages/Main/Main';
 import { SearchPage } from '/src/pages/Search';
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/account',
     element: <PersonalAccount />,
+  },
+  {
+    path: '/interests',
+    element: <Interests />,
   },
   {
     path: '*',

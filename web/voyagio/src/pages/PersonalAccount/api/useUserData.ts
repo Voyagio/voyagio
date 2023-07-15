@@ -45,5 +45,6 @@ export const useUserData = () => {
     collections,
     userCredentials,
     fetchUserData,
+    fetchFavorites,
   } as const;
 };

@@ -1,3 +1,4 @@
+import { deleteFavorite } from '/src/components/Results/api/api.ts';
 import { FC } from 'react';
 import { Header } from '/src/components/Header';
 import {
@@ -15,13 +16,15 @@ import { CollectionCard } from '/src/components/CollectionCard';
 import { CreateCollectionCard } from '/src/components/CreateCollectionCard';
 
 export const PersonalAccount: FC = () => {
-  const { favorites, collections, userCredentials } = useUserData();
+  const {
+    favorites, collections, userCredentials, fetchFavorites,
+  } = useUserData();
   return (
     <AccountPageContainer>
       <Header isWithSearchField />
       <AccountMainContainer>
         <AccountInfo email={userCredentials.email} />
-        <StyledTabs>
+        <StyledTabs defaultValue="col">
           <Tabs.List>
             <Tabs.Tab value="fav">Favourites</Tabs.Tab>
             <Tabs.Tab value="col">Trip Collections</Tabs.Tab>
@@ -38,6 +41,11 @@ export const PersonalAccount: FC = () => {
                   rating={item.rating}
                   imageUrl={item.image_url}
                   categoryName={item.category.name}
+                  isFavourite
+                  onFavoriteClick={() => {
+                    deleteFavorite(item.id).then();
+                    setTimeout(() => fetchFavorites(), 500);
+                  }}
                 />
               ))}
             </CardsGrid>
@@ -51,7 +59,7 @@ export const PersonalAccount: FC = () => {
                     key={item.id}
                     id={item.id}
                     title={item.name}
-                    description={''}
+                    description=""
                     imageUrl={item.image_url}
                   />
                 )),

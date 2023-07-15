@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
-export const HeaderContainer = styled.div`
+interface HeaderContainerProps {
+  contentCentered?: boolean
+}
+
+export const HeaderContainer = styled.div<HeaderContainerProps>`
   display: flex;
   background-color: white;
   
@@ -9,7 +13,7 @@ export const HeaderContainer = styled.div`
 
 
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ contentCentered }) => (contentCentered ? 'center' : 'space-between')};
   
   height: 72px;
 `;

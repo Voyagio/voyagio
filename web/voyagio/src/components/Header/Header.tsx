@@ -8,16 +8,33 @@ import { Link } from 'react-router-dom';
 interface HeaderProps {
   isWithSearchField?: boolean
   fieldInitialValue?: string
+  contentCentered?: boolean
 }
 
-export const Header: FC<HeaderProps> = ({ isWithSearchField, fieldInitialValue }) => (
-  <HeaderContainer>
-    <Flex gap={20} alignItems="center">
-      <Link to="/search"><Logo alt="Voaygio" src={VoyagioLogo} /></Link>
-      {isWithSearchField && <SearchField fieldSize="small" initialValue={fieldInitialValue} />}
-    </Flex>
-    <Flex gap={12}>
-      <CircleImg src="/backgroundSearch.jpg" />
-    </Flex>
-  </HeaderContainer>
+export const Header: FC<HeaderProps> = ({
+  isWithSearchField,
+  fieldInitialValue,
+  contentCentered,
+}) => (
+  contentCentered
+    ? (
+      <HeaderContainer contentCentered>
+        <Flex gap={20} alignItems="center">
+          <Logo alt="Voaygio" src={VoyagioLogo} />
+        </Flex>
+      </HeaderContainer>
+    )
+    : (
+      <HeaderContainer>
+        <Flex gap={20} alignItems="center">
+          <Link to="/search"><Logo alt="Voaygio" src={VoyagioLogo} /></Link>
+          {isWithSearchField && <SearchField fieldSize="small" initialValue={fieldInitialValue} />}
+        </Flex>
+        <Flex gap={12} alignItems="center">
+          <Link to="/account">
+            <CircleImg src="/default_avatar.png" />
+          </Link>
+        </Flex>
+      </HeaderContainer>
+    )
 );

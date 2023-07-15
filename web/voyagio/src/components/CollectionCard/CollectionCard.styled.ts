@@ -1,14 +1,16 @@
 import styled from '@emotion/styled';
 
 export const CollectionCardContainer = styled.div`
+  cursor: pointer;
+  
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-radius: 16px;
   background: white;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05),
-    0px 36px 28px -7px rgba(0, 0, 0, 0.05),
-    0px 17px 17px -7px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05),
+    0 36px 28px -7px rgba(0, 0, 0, 0.05),
+    0 17px 17px -7px rgba(0, 0, 0, 0.04);
 `;
 
 export const CollectionImage = styled.img`

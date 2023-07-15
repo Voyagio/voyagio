@@ -1,21 +1,23 @@
 import { VerticalDivider } from '/src/components/uikit';
 import { ActionIcon, Button, Flex } from '@mantine/core';
-import { IconHeart, IconStar } from '@tabler/icons-react';
+import { IconHeart, IconHeartFilled, IconStar } from '@tabler/icons-react';
 import { FC } from 'react';
 import {
   AdditionalInfoContainer, Address, AttractionImage, ButtonsContainer, CardContainer,
 } from './AttractionCard.styled';
 
 interface AttractionCardProps {
+  onFavoriteClick?: () => void
   label: string
   address: string
   rating: number
   categoryName: string
   imageUrl: string
+  isFavourite?: boolean
 }
 
 export const AttractionCard: FC<AttractionCardProps> = ({
-  label, address, rating, categoryName, imageUrl,
+  label, address, rating, categoryName, imageUrl, onFavoriteClick, isFavourite,
 }) => (
   <CardContainer>
     <AttractionImage src={imageUrl} />
@@ -42,8 +44,8 @@ export const AttractionCard: FC<AttractionCardProps> = ({
         <ButtonsContainer>
           <Button fullWidth>Add in trip</Button>
           <Flex justify="center" align="center">
-            <ActionIcon variant="transparent">
-              <IconHeart color="black" />
+            <ActionIcon variant="transparent" onClick={onFavoriteClick} color="red">
+              {isFavourite ? <IconHeartFilled color="black" /> : <IconHeart color="black" />}
             </ActionIcon>
           </Flex>
         </ButtonsContainer>

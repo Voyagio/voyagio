@@ -69,3 +69,10 @@ def remove_place_from_collection(session: Session, collection_id: uuid.UUID, pla
     collection = session.query(collection_models.Collection).get(collection_id)
     collection.places.remove(place)
     session.commit()
+
+
+def get_user_collections_containing_place(session: Session, place_id: uuid.UUID, user_id: uuid.UUID):
+    return session.query(collection_models.Collection).filter(
+        collection_models.Collection.author_id == user_id,
+        collection_models.Collection.places.any(place_models.Place.id == place_id)
+    ).all()

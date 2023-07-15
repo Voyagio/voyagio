@@ -52,6 +52,15 @@ export const ModalMain = styled.div`
   padding: 0 32px 32px 32px;
 `;
 
+export const ModalFooter = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 29px 0px;
+  background: white;
+`;
+
 export const ModalTitleContainer = styled.div`
   display: flex;
   gap: 8px;

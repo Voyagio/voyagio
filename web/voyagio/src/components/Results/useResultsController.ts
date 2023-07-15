@@ -1,3 +1,4 @@
+import { useRecommendedCollections } from './api/useRecommendedCollections';
 import { RouterParams } from '/src/app/root';
 import { useResults } from '/src/components/Results/api';
 import { useState } from 'react';
@@ -15,6 +16,7 @@ export interface FilterState {
 
 export const useResultsController = () => {
   const params = useParams<RouterParams>();
+
   const cityName = params.query;
 
   const [filterOpened, setFilterOpened] = useState(false);
@@ -27,7 +29,7 @@ export const useResultsController = () => {
       max_rating: 5,
     },
   });
-
+  const { recommendations } = useRecommendedCollections(params.query);
   const {
     results, favourites, fetchFavourites,
   } = useResults(cityName, currentFilterState);
@@ -54,5 +56,6 @@ export const useResultsController = () => {
     handleFilterClose,
     fetchFavourites,
     handleFilterChange,
+    recommendations,
   } as const;
 };

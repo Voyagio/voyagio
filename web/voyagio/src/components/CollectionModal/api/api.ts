@@ -20,3 +20,15 @@ export const patchCollectionInfo = async (
 
   return res.data;
 };
+
+export const saveRecommendation = async (collectionId: string) => {
+  const response = await axios.post(
+    `${import.meta.env.VITE_API_URL}/v1/collections/${collectionId}/save`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+
+  return response.data;
+};

@@ -4,6 +4,7 @@ import {
   EditButton,
   MapButton,
   ModalContainer,
+  ModalFooter,
   ModalHeader,
   ModalHeaderIcon,
   ModalHeaderInfo,
@@ -21,9 +22,11 @@ import reshuffleIcon from '/public/reshuffle_icon.svg';
 import { Button, TextInput, Textarea } from '@mantine/core';
 import { useToggleEdit } from './useToggleEdit';
 import { useNewModalInfo } from './useNewModalInfo';
+import { useRecommendation } from './useRecommendation';
 
 interface ICollectionModalComposition {
   New: FC<CollectionModalNewProps>;
+  Recommendation: FC<PropsWithChildren>;
 }
 
 type CollectionModalNewProps = {
@@ -86,6 +89,27 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
   );
 };
 
+export const Recommendation: FC<PropsWithChildren> = ({ children }) => {
+  const { title, description, imageUrl, handleSumbit } = useRecommendation();
+  return (
+    <ModalContainer>
+      <ModalHeader>
+        <ModalHeaderIcon src={imageUrl} />
+        <ModalHeaderInfo>
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </ModalHeaderInfo>
+      </ModalHeader>
+      <ModalMain>{children}</ModalMain>
+      <ModalFooter>
+        <Button onClick={handleSumbit} fullWidth>
+          Save Collection
+        </Button>
+      </ModalFooter>
+    </ModalContainer>
+  );
+};
+
 export const CollectionModal: FC<PropsWithChildren> &
   ICollectionModalComposition = ({ children }) => {
   const { toggleEdit, handleSubmit, toggle, rest } = useToggleEdit();
@@ -115,3 +139,4 @@ export const CollectionModal: FC<PropsWithChildren> &
 };
 
 CollectionModal.New = New;
+CollectionModal.Recommendation = Recommendation;

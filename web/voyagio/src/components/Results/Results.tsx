@@ -6,8 +6,12 @@ import { ActionIcon } from '@mantine/core';
 import { IconFilter } from '@tabler/icons-react';
 import { FC } from 'react';
 import {
-  CardsGrid, RecommendationsContainer, RecommendationsHeadingContainer,
+  CardsGrid,
+  RecommendationsContainer,
+  RecommendationsHeadingContainer,
+  RecommendedCollectionsContainer,
 } from '/src/components/Results/Results.styled.ts';
+import { CollectionCard } from '../CollectionCard';
 
 export const Results: FC = () => {
   const {
@@ -20,6 +24,7 @@ export const Results: FC = () => {
     fetchFavourites,
     handleFilterChange,
     currentFilterState,
+    recommendations
   } = useResultsController();
 
   return (
@@ -35,6 +40,20 @@ export const Results: FC = () => {
         </ActionIcon>
       </RecommendationsHeadingContainer>
       <p>Try personal list of places where to go: </p>
+
+      <RecommendedCollectionsContainer>
+        {recommendations.map((item) => (
+          <CollectionCard
+            key={item.id}
+            id={item.id}
+            title={item.name}
+            description={item.description}
+            imageUrl={item.image_url}
+            suggested
+          />
+        ))}
+      </RecommendedCollectionsContainer>
+
       <CardsGrid>
         {results.map(
           ({

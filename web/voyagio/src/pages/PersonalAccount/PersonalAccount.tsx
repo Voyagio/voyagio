@@ -59,11 +59,11 @@ export const PersonalAccount: FC = () => {
                     key={item.id}
                     id={item.id}
                     title={item.name}
-                    description=""
+                    description={item.description}
                     imageUrl={item.image_url}
                   />
                 )),
-                <CreateCollectionCard />,
+                <CreateCollectionCard key={'create-collection'} />,
               ]}
             </CollectionsGrid>
           </Tabs.Panel>

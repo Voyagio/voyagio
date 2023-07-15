@@ -21,5 +21,10 @@ export const RecommendationsHeadingContainer = styled.div`
 export const CardsGrid = styled.div`
   display: grid;
   grid-gap: 14px;
-  grid-template-columns: repeat(auto-fill,minmax(327px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(327px, auto));
+`;
+
+export const RecommendedCollectionsContainer = styled.div`
+  display: flex;
+  gap: 20px;
 `;

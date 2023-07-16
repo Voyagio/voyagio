@@ -34,7 +34,7 @@ export const useResultsController = () => {
       max_rating: 5,
     },
   });
-  const { recommendations } = useRecommendedCollections(params.query);
+  const { recommendations } = useRecommendedCollections(cityName);
   const {
     results,
   } = useResults(cityName, currentFilterState);

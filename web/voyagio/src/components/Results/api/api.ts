@@ -55,6 +55,8 @@ export const getResults = async (searchQuery: string, filterState: FilterState) 
 export const getRecommendedCollections = async (searchQuery: string) => {
   const response = await axios.post<CollectionsDTO>(
     `${import.meta.env.VITE_API_URL}/v1/search/recommendations/${searchQuery}`,
+    {},
+    { withCredentials: true },
   );
 
   return response.data;

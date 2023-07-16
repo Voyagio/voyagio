@@ -77,6 +77,7 @@ export const VDivider = styled.div`
 `;
 
 export const CloseButton = styled.button`
+  cursor: pointer;
   position: absolute;
   top: 14px;
   right: 12px;

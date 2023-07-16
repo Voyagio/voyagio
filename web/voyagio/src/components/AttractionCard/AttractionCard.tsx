@@ -112,7 +112,7 @@ export const AttractionCard: FC<AttractionCardProps> = ({
                 onChange={handleCollectionChoose}
                 value={addingInCollectionId}
               >
-                {collections.map(({ id, name }) => <option value={id}>{name}</option>)}
+                {collections.map(({ id, name }) => <option key={id} value={id}>{name}</option>)}
                 <option value="NEW_COLLECTION">+ New Collection</option>
               </CategorySelect>
             </Flex>

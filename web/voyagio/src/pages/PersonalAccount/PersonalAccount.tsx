@@ -19,7 +19,12 @@ export const PersonalAccount: FC = () => {
   const {
     favorites, collections, userCredentials, fetchUserData,
   } = useUserData();
-  const [opened, { open, close }] = useDisclosure(false);
+  const [opened, { open, close: closeModal }] = useDisclosure(false);
+
+  const close = async () => {
+    await fetchUserData();
+    closeModal();
+  };
 
   return (
     <AccountPageContainer>

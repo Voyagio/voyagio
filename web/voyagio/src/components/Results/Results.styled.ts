@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const RecommendationsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 32px;
 `;
 
 export const RecommendationsHeadingContainer = styled.div`

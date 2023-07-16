@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   CardImage,
   CardName,
@@ -14,7 +15,6 @@ import {
 
 import StarIcon from '/public/rating_star.svg';
 import CloseBtnIcon from '/public/close_button_icon.svg';
-import { FC } from 'react';
 import { useDeletePlaceHandler } from './useDeletePlaceHandler';
 
 type CollectionAttractionCardProps = {
@@ -25,6 +25,7 @@ type CollectionAttractionCardProps = {
   rating: number;
   type: string;
   category: string;
+  fetchCollectionPlaces: () => Promise<void>
 };
 
 export const CollectionAttractionCard: FC<CollectionAttractionCardProps> = ({
@@ -35,11 +36,17 @@ export const CollectionAttractionCard: FC<CollectionAttractionCardProps> = ({
   rating,
   type,
   category,
+  fetchCollectionPlaces,
 }) => {
   const { deletePlaceHandler } = useDeletePlaceHandler(id);
   return (
     <CollectionAttractionCardContainer>
-      <CloseButton onClick={deletePlaceHandler}>
+      <CloseButton onClick={() => {
+        deletePlaceHandler().then(() => {
+          fetchCollectionPlaces().then();
+        });
+      }}
+      >
         <img src={CloseBtnIcon} alt="btn" />
       </CloseButton>
       <CardImage src={imageUrl} alt="bg" />
@@ -53,7 +60,11 @@ export const CollectionAttractionCard: FC<CollectionAttractionCardProps> = ({
         <TagsGroup>
           <RatingGroup>
             <RatingStar src={StarIcon} alt="star" />
-            <span>{rating} Rating</span>
+            <span>
+              {rating}
+              {' '}
+              Rating
+            </span>
           </RatingGroup>
 
           <VDivider />

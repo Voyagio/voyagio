@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const CollectionCardContainer = styled.div`
   cursor: pointer;
+  width: 100%;
   
   display: flex;
   flex-direction: column;

@@ -1,3 +1,5 @@
+import { useDisclosure } from '@mantine/hooks';
+import { FC, useMemo } from 'react';
 import {
   CollectionCardContainer,
   CollectionImage,
@@ -5,8 +7,6 @@ import {
 } from './CollectionCard.styled';
 
 import { CollectionModal } from '../CollectionModal';
-import { useDisclosure } from '@mantine/hooks';
-import { FC } from 'react';
 import { useCollectionPlaces } from './api';
 import { CollectionAttractionCard } from '../CollectionAttractionCard';
 import { CollectionContext } from '/src/contexts/collectionContext';
@@ -28,7 +28,7 @@ export const CollectionCard: FC<CollectionCardProps> = ({
   suggested = false,
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
-  const { collectionPlaces } = useCollectionPlaces(id);
+  const { collectionPlaces, fetchCollectionPlaces } = useCollectionPlaces(id);
 
   const collectionsCards = collectionPlaces.map((item) => (
     <CollectionAttractionCard
@@ -39,14 +39,20 @@ export const CollectionCard: FC<CollectionCardProps> = ({
       address={item.address.value}
       rating={item.rating}
       type={item.category.name}
+      fetchCollectionPlaces={() => fetchCollectionPlaces(id)}
       category={item.category.name}
     />
   ));
+
+  const collectionContext = useMemo(() => ({
+    id, title, description, imageUrl,
+  }), [id, title, description, imageUrl]);
+
   return (
     <>
       <StyledModal opened={opened} onClose={close}>
         <CollectionContext.Provider
-          value={{ id, title, description, imageUrl }}
+          value={collectionContext}
         >
           {suggested ? (
             <CollectionModal.Recommendation>

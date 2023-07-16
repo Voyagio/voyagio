@@ -35,14 +35,7 @@ def create_place(session: Session, place: place_schemas.PlaceCreate) -> place_sc
     session.commit()
     session.refresh(db_place)
 
-    return place_schemas.Place(
-        id=db_place.id,
-        name=db_place.name,
-        category=db_place.category,
-        address=db_place.address,
-        image_url=db_place.image_url,
-        rating=db_place.rating
-    )
+    return db_place
 
 
 def remove_place_by_id(session: Session, id: uuid.UUID):
@@ -58,14 +51,7 @@ def get_places(session: Session, offset: int, limit: int):
         place_models.Place.rating > 0,
         place_models.Place.image_url != ""
     ).offset(offset).limit(limit).all()
-    return [place_schemas.Place(
-        id=place.id,
-        name=place.name,
-        category=place.category,
-        address=place.address,
-        image_url=place.image_url,
-        rating=place.rating
-    ) for place in places_models]
+    return places_models
 
 
 def get_city_places(
@@ -86,11 +72,12 @@ def get_city_places(
     if category_ids:
         filter_queries.append(place_models.Place.category_id.in_(category_ids))
     places_models = session.query(place_models.Place).filter(*filter_queries).offset(offset).limit(limit).all()
-    return [place_schemas.Place(
-        id=place.id,
-        name=place.name,
-        category=place.category,
-        address=place.address,
-        image_url=place.image_url,
-        rating=place.rating
-    ) for place in places_models]
+    return places_models
+
+
+# get place by name
+def get_place_by_name(session: Session, name: str):
+    place_model = session.query(place_models.Place).filter(place_models.Place.name == name).first()
+    if not place_model:
+        return None
+    return place_model

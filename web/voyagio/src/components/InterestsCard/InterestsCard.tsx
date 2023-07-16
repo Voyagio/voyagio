@@ -9,24 +9,28 @@ import { Button } from '@mantine/core';
 
 export const InterestsCard = () => {
   const {
-    handleIndexChoose, indicesChosen, activitiesRemaining, isSubmittingNotAvailable, handleSubmit,
+    handleChoose, chosen, activitiesRemaining, isSubmittingNotAvailable, handleSubmit, categories,
   } = useInterestsCardController();
 
   return (
     <InterestsCardContainer>
       <Heading>What activity do you like?</Heading>
       <InterestCardContainer>
-        {Array(10)
-          .fill('')
-          .map((value, index) => (
-            <InterestCard
-              chosen={indicesChosen[index]}
-              onClick={handleIndexChoose(index)}
-            />
-          ))}
+        {
+          categories
+            .map(({ id, name, image_url }) => (
+              <InterestCard
+                key={id}
+                name={name}
+                imageUrl={image_url}
+                chosen={chosen.includes(id)}
+                onClick={handleChoose(id)}
+              />
+            ))
+}
       </InterestCardContainer>
       <SubmitButtonContainer>
-        <Button fullWidth size="md" variant={isSubmittingNotAvailable ? 'light' : 'filled'} onClick={handleSubmit}>
+        <Button fullWidth size="md" disabled={isSubmittingNotAvailable} variant={isSubmittingNotAvailable ? 'light' : 'filled'} onClick={handleSubmit}>
           {isSubmittingNotAvailable
             ? `Choose ${activitiesRemaining} more`
             : 'Submit'}

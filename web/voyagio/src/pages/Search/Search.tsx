@@ -17,12 +17,8 @@ export const SearchPage: FC<SearchPageProps> = ({ isWithQuery }) => {
     <SearchPageContainer>
       <Header isWithSearchField={isWithQuery} fieldInitialValue={params.query} />
       <SearchPageContentContainer>
-        {isWithQuery ? (
-          <Results />
-        ) : (
-          <SearchField fieldSize="large" />
-        )}
-
+        {!isWithQuery && <SearchField fieldSize="large" />}
+        <Results />
       </SearchPageContentContainer>
     </SearchPageContainer>
   );

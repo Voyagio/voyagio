@@ -1,4 +1,4 @@
-import { deleteFavorite } from '/src/components/Results/api/api.ts';
+import { useDisclosure } from '@mantine/hooks';
 import { FC } from 'react';
 import { Header } from '/src/components/Header';
 import {
@@ -17,8 +17,10 @@ import { CreateCollectionCard } from '/src/components/CreateCollectionCard';
 
 export const PersonalAccount: FC = () => {
   const {
-    favorites, collections, userCredentials, fetchFavorites,
+    favorites, collections, userCredentials, fetchUserData,
   } = useUserData();
+  const [opened, { open, close }] = useDisclosure(false);
+
   return (
     <AccountPageContainer>
       <Header isWithSearchField />
@@ -35,17 +37,16 @@ export const PersonalAccount: FC = () => {
             <CardsGrid>
               {favorites.map((item) => (
                 <AttractionCard
+                  fetchUserData={fetchUserData}
+                  collections={collections}
+                  favorites={favorites}
+                  id={item.id}
                   key={item.id}
                   label={item.name}
                   address={item.address.value}
                   rating={item.rating}
                   imageUrl={item.image_url}
                   categoryName={item.category.name}
-                  isFavourite
-                  onFavoriteClick={() => {
-                    deleteFavorite(item.id).then();
-                    setTimeout(() => fetchFavorites(), 500);
-                  }}
                 />
               ))}
             </CardsGrid>
@@ -63,7 +64,7 @@ export const PersonalAccount: FC = () => {
                     imageUrl={item.image_url}
                   />
                 )),
-                <CreateCollectionCard key={'create-collection'} />,
+                <CreateCollectionCard opened={opened} open={open} close={close} key="create-collection" />,
               ]}
             </CollectionsGrid>
           </Tabs.Panel>

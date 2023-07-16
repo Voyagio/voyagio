@@ -14,8 +14,13 @@ export const AuthInputContainer = styled.div`
   gap: 32px;
 `;
 
-export const Icon = styled.img`
+interface IconProps {
+  isAccentColor?: boolean
+}
+
+export const Icon = styled.img<IconProps>`
   size: 24px;
+  ${({ isAccentColor }) => (isAccentColor ? 'filter: invert(37%) sepia(92%) saturate(1557%) hue-rotate(186deg) brightness(103%) contrast(95%);' : '')}
 `;
 
 const _GoogleButton = styled(Button)`
@@ -31,5 +36,5 @@ const _GoogleButton = styled(Button)`
 `;
 
 export const GoogleButton = createPolymorphicComponent<'button', ButtonProps>(
-  _GoogleButton
+  _GoogleButton,
 );

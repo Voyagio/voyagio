@@ -1,6 +1,5 @@
 import { AttractionCard } from '/src/components/AttractionCard';
 import { FilterModal } from '/src/components/Filter/FilterModal.tsx';
-import { addFavorite, deleteFavorite } from '/src/components/Results/api/api.ts';
 import { useResultsController } from '/src/components/Results/useResultsController.ts';
 import { ActionIcon } from '@mantine/core';
 import { IconFilter } from '@tabler/icons-react';
@@ -17,14 +16,15 @@ export const Results: FC = () => {
   const {
     results,
     cityName,
-    favourites,
     handleFilterOpen,
     handleFilterClose,
     filterOpened,
-    fetchFavourites,
     handleFilterChange,
     currentFilterState,
-    recommendations
+    recommendations,
+    fetchUserData,
+    collections,
+    favorites,
   } = useResultsController();
 
   return (
@@ -63,32 +63,20 @@ export const Results: FC = () => {
             image_url,
             address: { value: addressValue },
             category: { name: categoryName },
-          }) => {
-            const isFavourite = favourites.some((element) => element.id === id);
-
-            return (
-              <AttractionCard
-                key={id}
-                imageUrl={image_url}
-                rating={rating}
-                address={addressValue}
-                categoryName={categoryName}
-                label={name}
-                onFavoriteClick={() => {
-                  if (isFavourite) {
-                    deleteFavorite(id).then();
-                  } else {
-                    addFavorite(id).then();
-                  }
-
-                  setTimeout(() => {
-                    fetchFavourites().then();
-                  }, 500);
-                }}
-                isFavourite={isFavourite}
-              />
-            );
-          },
+          }) => (
+            <AttractionCard
+              collections={collections}
+              favorites={favorites}
+              id={id}
+              key={id}
+              imageUrl={image_url}
+              rating={rating}
+              address={addressValue}
+              categoryName={categoryName}
+              label={name}
+              fetchUserData={fetchUserData}
+            />
+          ),
         )}
       </CardsGrid>
       <FilterModal

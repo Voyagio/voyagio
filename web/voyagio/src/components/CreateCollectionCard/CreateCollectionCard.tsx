@@ -1,4 +1,4 @@
-import { useDisclosure } from '@mantine/hooks';
+import { FC } from 'react';
 import { CreateColCardContainer } from './CreateCollectionCard.styled';
 
 import plusIcon from '/public/col_card_plus.svg';
@@ -7,9 +7,16 @@ import { getRandomCollectionImage, postNewCollection } from './api';
 import { StyledModal } from '../StyledModal';
 import { CollectionContext } from '/src/contexts/collectionContext';
 
-export const CreateCollectionCard = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+interface CreateCollectionCardProps {
+  open: () => void
+  close: () => void
+  opened: boolean
+  modalOnly?: boolean
+}
 
+export const CreateCollectionCard: FC<CreateCollectionCardProps> = ({
+  modalOnly, opened, close, open,
+}) => {
   const handleSubmit = async (name: string, description: string) => {
     await postNewCollection(name, description);
     close();
@@ -29,9 +36,13 @@ export const CreateCollectionCard = () => {
           <CollectionModal.New onSubmit={handleSubmit} onClose={close} />
         </CollectionContext.Provider>
       </StyledModal>
-      <CreateColCardContainer onClick={open}>
-        <img src={plusIcon} />
-      </CreateColCardContainer>
+      {
+        !modalOnly && (
+        <CreateColCardContainer onClick={open}>
+          <img src={plusIcon} />
+        </CreateColCardContainer>
+        )
+      }
     </>
   );
 };

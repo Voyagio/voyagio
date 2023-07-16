@@ -1,8 +1,9 @@
-import { useRecommendedCollections } from './api/useRecommendedCollections';
 import { RouterParams } from '/src/app/root';
 import { useResults } from '/src/components/Results/api';
+import { useUserData } from '/src/pages/PersonalAccount/api';
 import { useState } from 'react';
 import { useParams } from 'react-router';
+import { useRecommendedCollections } from './api/useRecommendedCollections';
 
 export interface FilterState {
   category_filter: {
@@ -17,7 +18,11 @@ export interface FilterState {
 export const useResultsController = () => {
   const params = useParams<RouterParams>();
 
-  const cityName = params.query;
+  const cityName = params.query || 'Kazan';
+
+  const {
+    collections, favorites, fetchUserData,
+  } = useUserData();
 
   const [filterOpened, setFilterOpened] = useState(false);
   const [currentFilterState, setCurrentFilterState] = useState<FilterState>({
@@ -31,7 +36,7 @@ export const useResultsController = () => {
   });
   const { recommendations } = useRecommendedCollections(params.query);
   const {
-    results, favourites, fetchFavourites,
+    results,
   } = useResults(cityName, currentFilterState);
 
   const handleFilterOpen = () => {
@@ -47,14 +52,15 @@ export const useResultsController = () => {
   };
 
   return {
+    collections,
+    favorites,
+    fetchUserData,
     results,
     cityName,
-    favourites,
     filterOpened,
     currentFilterState,
     handleFilterOpen,
     handleFilterClose,
-    fetchFavourites,
     handleFilterChange,
     recommendations,
   } as const;

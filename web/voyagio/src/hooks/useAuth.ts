@@ -36,7 +36,7 @@ export const useAuth = () => {
     );
 
     if (response.status === 200) {
-      navigate('/search');
+      navigate('/interests');
     }
 
     return response;

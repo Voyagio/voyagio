@@ -3,6 +3,7 @@ import axios from 'axios';
 export interface CategoryDTO {
   id: string
   name: string
+  image_url: string
 }
 
 export type CategoriesDTO = CategoryDTO[];

@@ -38,9 +38,9 @@ export const CollectionCard: FC<CollectionCardProps> = ({
       imageUrl={item.image_url}
       address={item.address.value}
       rating={item.rating}
-      type={item.category.name}
+      category="Attraction"
       fetchCollectionPlaces={() => fetchCollectionPlaces(id)}
-      category={item.category.name}
+      type={item.category.name}
     />
   ));
 
@@ -55,11 +55,11 @@ export const CollectionCard: FC<CollectionCardProps> = ({
           value={collectionContext}
         >
           {suggested ? (
-            <CollectionModal.Recommendation>
+            <CollectionModal.Recommendation close={close}>
               {collectionsCards}
             </CollectionModal.Recommendation>
           ) : (
-            <CollectionModal>{collectionsCards}</CollectionModal>
+            <CollectionModal collectionPlaces={collectionPlaces}>{collectionsCards}</CollectionModal>
           )}
         </CollectionContext.Provider>
       </StyledModal>

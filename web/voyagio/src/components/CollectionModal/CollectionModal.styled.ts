@@ -11,7 +11,7 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   background: #f8f9fd;
   gap: 20px;
-  min-width: 693px;
+  width: 693px;
 `;
 
 export const ModalHeader = styled.div`
@@ -57,7 +57,7 @@ export const ModalFooter = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 29px 0px;
+  padding: 29px 217px;
   background: white;
 `;
 

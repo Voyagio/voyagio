@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useState } from "react";
+import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import {
   CloseButton,
   EditButton,
@@ -14,19 +15,20 @@ import {
   NewModalContainer,
   NewModalImage,
   ReshuffleButton,
-} from './CollectionModal.styled';
+} from "./CollectionModal.styled";
 
-import mapIcon from '/public/map_icon.svg';
-import editIcon from '/public/edit_icon.svg';
-import reshuffleIcon from '/public/reshuffle_icon.svg';
-import { Button, TextInput, Textarea } from '@mantine/core';
-import { useToggleEdit } from './useToggleEdit';
-import { useNewModalInfo } from './useNewModalInfo';
-import { useRecommendation } from './useRecommendation';
+import { CollectionPlaceDTO } from "/src/components/CollectionCard/api/api";
+import mapIcon from "/public/map_icon.svg";
+import editIcon from "/public/edit_icon.svg";
+import reshuffleIcon from "/public/reshuffle_icon.svg";
+import { Button, TextInput, Textarea } from "@mantine/core";
+import { useToggleEdit } from "./useToggleEdit";
+import { useNewModalInfo } from "./useNewModalInfo";
+import { useRecommendation } from "./useRecommendation";
 
 interface ICollectionModalComposition {
   New: FC<CollectionModalNewProps>;
-  Recommendation: FC<PropsWithChildren>;
+  Recommendation: FC<PropsWithChildren<RecommendationProps>>;
 }
 
 type CollectionModalNewProps = {
@@ -59,7 +61,7 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
         variant="default"
         value={title}
         onChange={handleTitleChange}
-        styles={{ input: { fontSize: '14px', fontFamily: 'Lato, sans-serif' } }}
+        styles={{ input: { fontSize: "14px", fontFamily: "Lato, sans-serif" } }}
       />
       <Textarea
         label="Description"
@@ -70,7 +72,7 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
         value={description}
         onChange={handleDescriptionChange}
         styles={{
-          input: { fontSize: '14px', fontFamily: 'Lato, sans-serif' },
+          input: { fontSize: "14px", fontFamily: "Lato, sans-serif" },
         }}
       />
 
@@ -89,7 +91,14 @@ const New: FC<CollectionModalNewProps> = ({ onSubmit, onClose }) => {
   );
 };
 
-export const Recommendation: FC<PropsWithChildren> = ({ children }) => {
+interface RecommendationProps {
+  close: () => void;
+}
+
+export const Recommendation: FC<PropsWithChildren<RecommendationProps>> = ({
+  children,
+  close,
+}) => {
   const { title, description, imageUrl, handleSumbit } = useRecommendation();
   return (
     <ModalContainer>
@@ -102,7 +111,13 @@ export const Recommendation: FC<PropsWithChildren> = ({ children }) => {
       </ModalHeader>
       <ModalMain>{children}</ModalMain>
       <ModalFooter>
-        <Button onClick={handleSumbit} fullWidth>
+        <Button
+          onClick={() => {
+            handleSumbit();
+            close();
+          }}
+          fullWidth
+        >
           Save Collection
         </Button>
       </ModalFooter>
@@ -110,10 +125,45 @@ export const Recommendation: FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export const CollectionModal: FC<PropsWithChildren> &
-  ICollectionModalComposition = ({ children }) => {
+interface CollectionModalProps {
+  collectionPlaces: CollectionPlaceDTO[];
+}
+
+export const CollectionModal: FC<PropsWithChildren<CollectionModalProps>> &
+  ICollectionModalComposition = ({ children, collectionPlaces }) => {
   const { toggleEdit, handleSubmit, toggle, rest } = useToggleEdit();
   const { title, description, imageUrl } = rest;
+
+  const [isMapOpened, setIsMapOpened] = useState(false);
+
+  let x1: number = 0;
+  let x2: number = 0;
+  let y1: number = 0;
+  let y2: number = 0;
+  collectionPlaces.forEach((collectionPlace) => {
+    x1 = x1
+      ? Math.min(x1, collectionPlace.address.lat)
+      : collectionPlace.address.lat;
+    x2 = x2
+      ? Math.max(x2, collectionPlace.address.lat)
+      : collectionPlace.address.lat;
+    y1 = y1
+      ? Math.min(y1, collectionPlace.address.lon)
+      : collectionPlace.address.lon;
+    y2 = y2
+      ? Math.max(y2, collectionPlace.address.lon)
+      : collectionPlace.address.lon;
+  });
+
+  const PADDING = 0.0009;
+  const defaultState = {
+    center: [(x1 + x2) / 2, (y1 + y2) / 2],
+    bounds: [
+      [x1 - PADDING, y1 - PADDING],
+      [x2 + PADDING, y2 + PADDING],
+    ],
+  };
+
   return toggleEdit ? (
     <New onSubmit={handleSubmit} onClose={toggle} />
   ) : (
@@ -130,8 +180,23 @@ export const CollectionModal: FC<PropsWithChildren> &
           <p>{description}</p>
         </ModalHeaderInfo>
       </ModalHeader>
-      <ModalMain>{children}</ModalMain>
-      <MapButton>
+      <ModalMain>
+        {isMapOpened ? (
+          <div>
+            <YMaps>
+              <Map defaultState={defaultState} width={"100%"}>
+                <ZoomControl></ZoomControl>
+                {collectionPlaces.map(({ id, address: { lat, lon } }) => (
+                  <Placemark key={id} geometry={[lat, lon]} />
+                ))}
+              </Map>
+            </YMaps>
+          </div>
+        ) : (
+          children
+        )}
+      </ModalMain>
+      <MapButton onClick={() => setIsMapOpened(!isMapOpened)}>
         <img src={mapIcon} />
       </MapButton>
     </ModalContainer>

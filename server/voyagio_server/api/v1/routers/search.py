@@ -22,6 +22,12 @@ AVAILABLE_COLLECTION_IMAGES = [
     "https://github.com/Voyagio/voyagio/raw/main/static/collection_3.svg",
     "https://github.com/Voyagio/voyagio/raw/main/static/collection_4.svg",
 ]
+AVAILABLE_COLLECTION_PREFIXES = ["Adventurous", "Explorative", "Curious", "Open-minded", "Fearless", "Inquisitive",
+                                 "Fearless", "Spirited", "Bold", "Discovering", "Limitless", "Wanderlust", "Expansive",
+                                 "Daring", "Enthusiastic", "Boundless", "Thrill-seeking", "Intrepid", "Unrestrained",
+                                 "Unbound", "Trailblazing", "Inspirational", "Empowering", "Transformative",
+                                 "Liberating", "Awakening", "Illuminating", "Invigorating", "Awe-inspiring",
+                                 "Exhilarating"]
 RECOMMENDATIONS_NUMBER = 2
 
 
@@ -37,9 +43,10 @@ async def get_search_recommendations(search_string: str,
                                      db: Session = Depends(get_session)):
     result = []
     collection_images = random.sample(AVAILABLE_COLLECTION_IMAGES, RECOMMENDATIONS_NUMBER)
+    collection_names = random.sample(AVAILABLE_COLLECTION_PREFIXES, RECOMMENDATIONS_NUMBER)
     for i in range(RECOMMENDATIONS_NUMBER):
         collection = collection_crud.create_collection(session=db,
-                                                       name=f"Recommendation {i + 1}",
+                                                       name=f"{collection_names[i]} voyage",
                                                        image_url=collection_images[i])
         recommended_places = get_user_recommended_places(session=db, user_id=user.id)
         for place in recommended_places:

@@ -47,9 +47,7 @@ export const FilterModal: FC<FilterModalProps> = ({
       <FilterContainer>
         <Flex direction="column" gap={30}>
           <h1>Filter</h1>
-          <div>
-            <h3>Categories</h3>
-          </div>
+        
           <Flex direction="column" gap={10}>
             <h3>Minimal rating</h3>
             <Radio.Group

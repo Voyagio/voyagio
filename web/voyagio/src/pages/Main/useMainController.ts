@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 export const useMainController = () => {
-  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
 
-  return { count, setCount } as const;
+  useEffect(() => {
+    navigate('/login');
+  }, []);
 };

@@ -6,7 +6,15 @@ export const SearchPageContainer = styled.div`
 `;
 
 export const SearchPageContentContainer = styled.div`
-  padding: 32px 48px;
+  max-width: 1400px;
+  
+  margin: 32px auto;
+  
+  padding: 0 48px;
   
   display: flex;
+  flex-direction: column;
+  gap: 32px;
+  
+  box-sizing: content-box;
 `;

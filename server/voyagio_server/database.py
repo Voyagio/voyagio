@@ -11,8 +11,7 @@ from config import Config
 SQLALCHEMY_DATABASE_URL = Config.POSTGRES_CONNECTION_STRING
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
-    echo=True
+    SQLALCHEMY_DATABASE_URL
 )
 
 SessionLocal = sessionmaker(

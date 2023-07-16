@@ -6,7 +6,7 @@ authors = []
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.9,<3.12"
 fastapi = "^0.97.0"
 sqlalchemy = "^2.0.16"
 sqlalchemy-utils = "^0.41.1"
@@ -15,6 +15,9 @@ psycopg2-binary = "^2.9.6"
 passlib = "^1.7.4"
 pyjwt = "^2.7.0"
 alembic = "^1.11.1"
+tensorflow = "^2.13.0"
+tensorflow-recommenders = "^0.7.3"
+pandas = "^2.0.3"
 
 
 [build-system]

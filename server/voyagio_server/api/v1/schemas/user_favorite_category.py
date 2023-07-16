@@ -1,10 +1,10 @@
-# import uuid
-#
-# from pydantic import BaseModel
-#
-# class FavoriteCategory(BaseModel):
-#     id: uuid.UUID
-#     name: str
-#
-#     class Config:
-#         orm_mode = True
+import uuid
+
+from pydantic import BaseModel
+
+
+class FavoriteCategories(BaseModel):
+    category_ids: list[uuid.UUID]
+
+    class Config:
+        orm_mode = True

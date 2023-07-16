@@ -19,6 +19,7 @@ import {
 
 import { CollectionPlaceDTO } from "/src/components/CollectionCard/api/api";
 import mapIcon from "/public/map_icon.svg";
+import placesIcon from "/public/places_icon.svg";
 import editIcon from "/public/edit_icon.svg";
 import reshuffleIcon from "/public/reshuffle_icon.svg";
 import { Button, TextInput, Textarea } from "@mantine/core";
@@ -197,7 +198,8 @@ export const CollectionModal: FC<PropsWithChildren<CollectionModalProps>> &
         )}
       </ModalMain>
       <MapButton onClick={() => setIsMapOpened(!isMapOpened)}>
-        <img src={mapIcon} />
+        {/* <img src={mapIcon} /> */}
+        <img src={ isMapOpened ? placesIcon : mapIcon } />
       </MapButton>
     </ModalContainer>
   );

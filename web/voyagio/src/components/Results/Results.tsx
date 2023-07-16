@@ -12,10 +12,6 @@ import {
 } from '/src/components/Results/Results.styled.ts';
 import { CollectionCard } from '../CollectionCard';
 
-const adjectivesList = ['Adventurous', 'Explorative', 'Curious', 'Open-minded', 'Fearless', 'Inquisitive', 'Fearless', 'Spirited', 'Bold', 'Discovering', 'Limitless', 'Wanderlust', 'Expansive', 'Daring', 'Enthusiastic', 'Boundless', 'Thrill-seeking', 'Intrepid', 'Unrestrained', 'Unbound', 'Trailblazing', 'Inspirational', 'Empowering', 'Transformative', 'Liberating', 'Awakening', 'Illuminating', 'Invigorating', 'Awe-inspiring', 'Exhilarating'];
-
-const getName = () => adjectivesList[Math.floor(Math.random() * adjectivesList.length)];
-
 interface ResultsProps {
   isWithQuery?: boolean
 }
@@ -60,7 +56,7 @@ export const Results: FC<ResultsProps> = ({ isWithQuery }) => {
           <CollectionCard
             key={item.id}
             id={item.id}
-            title={`${getName()} voyage`}
+            title={item.name}
             description={item.description}
             imageUrl={item.image_url}
             suggested

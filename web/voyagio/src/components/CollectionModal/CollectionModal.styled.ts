@@ -59,6 +59,8 @@ export const ModalFooter = styled.div`
   width: 100%;
   padding: 29px 217px;
   background: white;
+  position: sticky;
+  bottom: 0;
 `;
 
 export const ModalTitleContainer = styled.div`

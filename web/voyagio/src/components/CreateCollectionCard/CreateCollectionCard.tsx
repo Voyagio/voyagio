@@ -17,8 +17,8 @@ interface CreateCollectionCardProps {
 export const CreateCollectionCard: FC<CreateCollectionCardProps> = ({
   modalOnly, opened, close, open,
 }) => {
-  const handleSubmit = async (name: string, description: string) => {
-    await postNewCollection(name, description);
+  const handleSubmit = async (name: string, description: string, imageUrl: string) => {
+    await postNewCollection(name, description, imageUrl);
     close();
   };
 

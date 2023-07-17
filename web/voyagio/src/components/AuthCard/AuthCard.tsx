@@ -23,7 +23,9 @@ export const AuthCard: FC = () => {
       <AuthForm signup={signup} />
 
       <AuthLinkGroup>
-        <AuthLinkSpan>Already have an account?</AuthLinkSpan>
+        <AuthLinkSpan>
+          {signup ? 'Already have an account?' : 'Do not have an account?'}
+        </AuthLinkSpan>
         <AuthLinkA to={`/${signup ? 'login' : 'signup'}`}>
           {signup ? 'Sign In' : 'Sign Up'}
         </AuthLinkA>

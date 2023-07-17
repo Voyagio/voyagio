@@ -38,4 +38,8 @@ async def get_place_belonging_user_collections(place_id: uuid.UUID,
     db_collections = collection_crud.get_user_collections_containing_place(
         session=db, place_id=place_id, user_id=user.id
     )
-    return db_collections
+    db_collections_filtered = list(filter(
+        lambda collection: collection.id != user.favorites_collection_id,
+        db_collections
+    ))
+    return db_collections_filtered

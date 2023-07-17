@@ -2,7 +2,7 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const slider = keyframes`
-  0%, 28%, 100% {
+  0%, 30%, 100% {
    transform: translateY(0);
    animation-timing-function: ease;
  }
@@ -10,7 +10,7 @@ export const slider = keyframes`
    transform: translateY(-100%);
    animation-timing-function: step-end;
  }
- 95% {
+ 97% {
    transform: translateY(100%);
    animation-timing-function: ease;
  }
@@ -26,6 +26,6 @@ export const Slide = styled.div<{ bg: string; delay: string }>`
   background-image: url(${(props) => props.bg});
   background-size: cover;
   background-position: center;
-  animation: ${slider} 10.5s infinite;
+  animation: ${slider} 19.5s infinite;
   animation-delay: ${(props) => props.delay};
 `;

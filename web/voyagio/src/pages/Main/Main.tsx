@@ -1,9 +1,7 @@
 import { useMainController } from './useMainController';
 
 export function Main() {
-  useMainController();
+  useMainController('/search');
 
-  return (
-    <p>Redirecting...</p>
-  );
+  return <p>Redirecting...</p>;
 }

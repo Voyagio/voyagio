@@ -14,11 +14,12 @@ import { CardsGrid } from '/src/components/Results/Results.styled';
 import { useUserData } from './api';
 import { CollectionCard } from '/src/components/CollectionCard';
 import { CreateCollectionCard } from '/src/components/CreateCollectionCard';
+import { useMainController } from '../Main/useMainController';
 
 export const PersonalAccount: FC = () => {
-  const {
-    favorites, collections, userCredentials, fetchUserData,
-  } = useUserData();
+  useMainController('/account');
+  const { favorites, collections, userCredentials, fetchUserData } =
+    useUserData();
   const [opened, { open, close: closeModal }] = useDisclosure(false);
 
   const close = async () => {
@@ -69,7 +70,12 @@ export const PersonalAccount: FC = () => {
                     imageUrl={item.image_url}
                   />
                 )),
-                <CreateCollectionCard opened={opened} open={open} close={close} key="create-collection" />,
+                <CreateCollectionCard
+                  opened={opened}
+                  open={open}
+                  close={close}
+                  key="create-collection"
+                />,
               ]}
             </CollectionsGrid>
           </Tabs.Panel>

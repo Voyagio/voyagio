@@ -25,7 +25,7 @@ export const AuthMain: FC = () => {
         newState.unshift(newState.pop() as boolean);
         return newState;
       });
-    }, 3500);
+    }, 6500);
     return () => clearInterval(interval);
   }, []);
 

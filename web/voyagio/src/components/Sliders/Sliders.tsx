@@ -14,13 +14,13 @@ export const Sliders: FC = () => {
         bg={
           'https://raw.githubusercontent.com/Voyagio/voyagio/main/static/backgroundLogin2.png'
         }
-        delay={'-3.5s'}
+        delay={'-6.5s'}
       ></Slide>
       <Slide
         bg={
           'https://raw.githubusercontent.com/Voyagio/voyagio/main/static/backgroundLogin3.png'
         }
-        delay={'-7s'}
+        delay={'-13s'}
       ></Slide>
     </>
   );

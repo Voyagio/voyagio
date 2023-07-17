@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import VkIcon from '/public/vk_icon.svg';
 import InstaIcon from '/public/instagram_icon.svg';
 import {
@@ -16,12 +16,25 @@ import {
 import { AuthCard } from '../AuthCard';
 
 export const AuthMain: FC = () => {
+  const [kebabState, setKebabState] = useState<boolean[]>([true, false, false]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setKebabState((prevState) => {
+        const newState = [...prevState];
+        newState.unshift(newState.pop() as boolean);
+        return newState;
+      });
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <AuthPageMainContainer>
       <AuthPageKebabGroup>
-        <KebabCircle current={true} />
-        <KebabCircle />
-        <KebabCircle />
+        <KebabCircle current={kebabState[0]} />
+        <KebabCircle current={kebabState[1]} />
+        <KebabCircle current={kebabState[2]} />
       </AuthPageKebabGroup>
 
       <AuthUnderlay>

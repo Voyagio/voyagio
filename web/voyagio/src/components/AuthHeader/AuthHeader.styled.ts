@@ -4,6 +4,7 @@ export const AuthHeaderContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: 20px 50px;
+  z-index: 100;
 `;
 
 export const AuthHeaderButtonGroup = styled.div`

@@ -26,6 +26,7 @@ export const KebabCircle = styled.div((props: { current?: boolean }) => ({
   borderRadius: '10px',
   background: 'white',
   opacity: props.current ? '1' : '0.3',
+  zIndex: 100,
 }));
 
 export const AuthUnderlay = styled.div`

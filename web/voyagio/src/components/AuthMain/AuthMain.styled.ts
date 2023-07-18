@@ -38,6 +38,7 @@ export const AuthUnderlay = styled.div`
   backdrop-filter: blur(50px);
   padding: 69px 60px;
   gap: 111px;
+  z-index: 100;
 `;
 
 export const AuthInformationContainer = styled.div`
